@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>og</title>
+<style>
+@font-face{font-family:"Barlow Condensed";src:url(/fonts/barlow-condensed-700.woff2) format("woff2");font-weight:700}
+@font-face{font-family:Inter;src:url(/fonts/inter-600.woff2) format("woff2");font-weight:600}
+*{box-sizing:border-box;margin:0}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{position:relative;background:#e4e3de linear-gradient(180deg,#efeee9,#d3d2cc);font-family:Inter,Arial,sans-serif;color:#15171a}
+.noise{position:absolute;inset:0;opacity:1;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.logo{position:absolute;left:64px;top:52px;display:flex;align-items:center;gap:16px;font:700 38px/1 "Barlow Condensed",Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.mark{width:52px;height:52px;background:#15171a;border-radius:4px;display:grid;place-items:center}
+.mark svg{width:32px;height:32px}
+h1{position:absolute;left:64px;top:150px;width:760px;font:700 120px/.92 "Barlow Condensed",Arial,sans-serif;text-transform:uppercase}
+.ficha{position:absolute;right:64px;top:150px;width:290px;padding:30px;color:#fff;background:linear-gradient(160deg,#30353b,#15171a 70%);border-radius:4px;box-shadow:0 24px 40px -24px rgba(21,23,26,.65)}
+.ficha div{padding:16px 0;border-top:1px solid rgba(255,255,255,.16)}
+.ficha div:first-child{border-top:0;padding-top:0}
+.ficha b{display:block;font:600 14px/1 Inter,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#b9c3c9}
+.ficha span{display:block;margin-top:6px;font:700 52px/1 "Barlow Condensed",Arial,sans-serif;text-transform:uppercase;color:#c4ebfc}
+.foot{position:absolute;left:64px;bottom:52px;font:600 26px/1 Inter,Arial,sans-serif;letter-spacing:.04em;color:#464b50}
+.foot i{font-style:normal;color:#0a5675}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="logo"><span class="mark"><svg viewBox="0 0 64 64"><g stroke="#c4ebfc" stroke-width="6" stroke-linecap="round" fill="none"><path d="M32 8v48M10.2 20l43.6 24M10.2 44l43.6-24"/></g></svg></span>Refrigeradores Express</div>
+<h1>Reparación de refrigeradores en Guadalajara</h1>
+<div class="ficha"><div><b>Revisión</b><span>$200</span></div><div><b>Horario · Lun–Sáb</b><span>8–19 h</span></div><div><b>Experiencia</b><span>10 años</span></div></div>
+<div class="foot">Guadalajara <i>·</i> Zapopan <i>·</i> Tlaquepaque <i>·</i> Tonalá</div>
+</body>
+</html>

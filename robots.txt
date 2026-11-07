@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /_fuente/
 
 Sitemap: https://refrigeradores-express-gdl.onrender.com/sitemap.xml
