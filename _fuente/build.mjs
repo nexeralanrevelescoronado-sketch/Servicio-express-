@@ -46,6 +46,29 @@ for (const p of PAGES) {
 }
 out('404.html', render404(ctx));
 
+// Inicio inmersivo 3D: si existe _fuente/inicio-3d.html, reemplaza la portada de la plantilla.
+// Usa las mismas variables (SITE_URL, GTM_ID, og.jpg) y pasa por las mismas verificaciones de abajo.
+const INICIO_3D = join(ROOT, '_fuente', 'inicio-3d.html');
+if (existsSync(INICIO_3D)) {
+  const ogImg = hasOg
+    ? `<meta property="og:image" content="${SITE_URL}/og.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">`
+    : '';
+  const gtmHead = GTM_ID
+    ? `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');</script>`
+    : '';
+  const gtmBody = GTM_ID
+    ? `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>`
+    : '';
+  const html = readFileSync(INICIO_3D, 'utf8')
+    .replaceAll('{{SITE_URL}}', SITE_URL)
+    .replace('{{OG_IMAGE}}', ogImg)
+    .replace('{{GTM_HEAD}}', gtmHead)
+    .replace('{{GTM_BODY}}', gtmBody);
+  if (/\{\{[A-Z_]+\}\}/.test(html)) errors.push('home: quedó una variable {{...}} sin reemplazar en inicio-3d.html');
+  out('index.html', html);
+  generated.set('/', html);
+}
+
 // favicon
 out(
   'favicon.svg',
