@@ -43,7 +43,7 @@ export const GROUPS = {
   fallas: 'Fallas comunes',
 };
 
-export const PAGES = [
+const CORE = [
   // ───────────────────────── INICIO ─────────────────────────
   {
     key: 'home',
@@ -86,6 +86,19 @@ export const PAGES = [
         ],
       },
       { type: 'steps', id: 'proceso', title: 'Así trabajamos', kicker: 'Sin sorpresas', steps: STEPS },
+      {
+        type: 'posts',
+        id: 'blog',
+        title: 'Del blog',
+        kicker: 'Consejos y cuidados',
+        links: ['p1', 'p2', 'p3', 'p4'],
+      },
+      {
+        type: 'related',
+        id: 'conoce-mas',
+        title: 'Conoce más',
+        links: ['servicios', 'cobertura', 'nosotros', 'contacto'],
+      },
       {
         type: 'faq',
         id: 'preguntas',
@@ -722,3 +735,350 @@ export const PAGES = [
     ],
   },
 ];
+
+// ───────────────────────── SITIO COMPLETO ─────────────────────────
+// Páginas de estructura (hubs, nosotros, contacto) y blog. Contenido informativo general;
+// no se afirman garantías, tiempos de llegada, marcas ni domicilio.
+const POST_DATE = '2026-11-07';
+
+const EXTRA = [
+  {
+    key: 'servicios',
+    slug: 'servicios',
+    group: 'sitio',
+    kind: 'info',
+    navName: 'Servicios',
+    title: 'Servicios de reparación de refrigeradores en Guadalajara',
+    description:
+      'Reparación de refrigeradores domésticos, comerciales y cámaras de refrigeración, más mantenimiento. Revisión $200 en Guadalajara y zona metropolitana.',
+    kicker: 'Todo lo que reparamos',
+    h1: 'Servicios de reparación de refrigeradores en Guadalajara',
+    lead: 'Refrigeradores de casa, equipos de negocio y cámaras de refrigeración. Elige tu caso o la falla que tienes y ve directo a la página que te explica qué hacer.',
+    waMsg: 'Hola, quiero información de sus servicios de reparación de refrigeradores.',
+    sections: [
+      { type: 'cards', id: 'tipos', title: 'Por tipo de equipo', kicker: 'Qué reparamos', links: ['dom', 'com', 'cam', 'man'] },
+      { type: 'cards', id: 'por-falla', title: 'Por falla', kicker: 'Lo que más nos escriben', links: ['nenfria', 'ncongela', 'ruido', 'agua'] },
+      { type: 'steps', id: 'proceso', title: 'Así trabajamos', kicker: 'Sin sorpresas', steps: STEPS },
+      { type: 'related', id: 'mas', title: 'Más del sitio', links: ['cobertura', 'nosotros', 'blog', 'contacto'] },
+    ],
+  },
+  {
+    key: 'cobertura',
+    slug: 'cobertura',
+    group: 'sitio',
+    kind: 'info',
+    navName: 'Cobertura',
+    title: 'Cobertura: Guadalajara, Zapopan, Tlaquepaque y Tonalá',
+    description:
+      'Reparación de refrigeradores en Guadalajara, Zapopan, Tlaquepaque y Tonalá. Mira las zonas que atendemos y escríbenos por WhatsApp. Lun–Sáb 8–19 h.',
+    kicker: 'Dónde llegamos',
+    h1: 'Zonas donde reparamos refrigeradores',
+    lead: 'Atendemos la zona metropolitana de Guadalajara. Entra a tu zona para ver las fallas más comunes y cómo pedir el servicio.',
+    waMsg: 'Hola, quiero saber si dan servicio en mi zona.',
+    sections: [
+      {
+        type: 'zones',
+        id: 'zonas',
+        title: 'Zonas',
+        kicker: 'Zona metropolitana',
+        rows: [
+          { name: 'Guadalajara', note: 'Providencia · Americana · Country Club', link: null },
+          { name: 'Zapopan', note: 'Andares', link: 'zap' },
+          { name: 'Tlaquepaque', note: 'San Pedro Tlaquepaque', link: 'tlq' },
+          { name: 'Tonalá', note: 'Tonalá', link: 'ton' },
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'tu-colonia',
+        title: '¿No ves tu colonia?',
+        kicker: 'Escríbenos',
+        paragraphs: [
+          'Las colonias que aparecen son ejemplos de las zonas donde trabajamos, no una lista cerrada. Mándanos tu ubicación por WhatsApp y con gusto te decimos si podemos atenderte.',
+        ],
+      },
+      { type: 'steps', id: 'proceso', title: 'Así trabajamos', kicker: 'Sin sorpresas', steps: STEPS },
+      { type: 'related', id: 'mas', title: 'Más del sitio', links: ['servicios', 'nosotros', 'blog', 'contacto'] },
+    ],
+  },
+  {
+    key: 'nosotros',
+    slug: 'nosotros',
+    group: 'sitio',
+    kind: 'about',
+    navName: 'Nosotros',
+    title: 'Nosotros | 10 años reparando refrigeradores en Guadalajara',
+    description:
+      'Conoce Refrigeradores Express: diez años reparando refrigeradores domésticos, comerciales y cámaras en Guadalajara, con revisión de $200 y diagnóstico claro.',
+    kicker: 'Quiénes somos',
+    h1: 'Diez años reparando refrigeradores en Guadalajara',
+    lead: 'Somos Refrigeradores Express. Reparamos y damos mantenimiento a refrigeradores de casa, equipos de negocio y cámaras de refrigeración.',
+    waMsg: 'Hola, quiero más información de Refrigeradores Express.',
+    sections: [
+      {
+        type: 'prose',
+        id: 'historia',
+        title: 'Lo que hacemos',
+        kicker: 'Nuestro trabajo',
+        paragraphs: [
+          'Llevamos diez años en la reparación de refrigeración en Guadalajara, Zapopan, Tlaquepaque y Tonalá. Atendemos refrigeradores domésticos, equipos comerciales para restaurantes, tiendas y cocinas, y cámaras de refrigeración. También hacemos mantenimiento.',
+          'Sabemos que un refrigerador descompuesto no puede esperar: la comida se echa a perder y, en un negocio, cada hora parada cuesta. Por eso la atención es directa, por WhatsApp o por llamada.',
+        ],
+      },
+      {
+        type: 'list',
+        id: 'forma',
+        title: 'Cómo trabajamos',
+        kicker: 'Sin sorpresas',
+        items: [
+          'Primero la revisión, que cuesta $200.',
+          'Después te explicamos qué tiene el equipo y qué se repara.',
+          'Tú decides antes de que empecemos.',
+          'Nos escribes o nos llamas directo, sin intermediarios.',
+          'Atendemos de lunes a sábado, de 8:00 a 19:00 h.',
+          'Cubrimos Guadalajara, Zapopan, Tlaquepaque y Tonalá.',
+        ],
+      },
+      { type: 'cards', id: 'servicios', title: 'Servicios', kicker: 'Qué reparamos', links: ['dom', 'com', 'cam', 'man'] },
+      { type: 'related', id: 'mas', title: 'Más del sitio', links: ['servicios', 'cobertura', 'blog', 'contacto'] },
+    ],
+  },
+  {
+    key: 'blog',
+    slug: 'blog',
+    group: 'sitio',
+    kind: 'blog',
+    plain: true,
+    navName: 'Blog',
+    title: 'Blog de refrigeración: consejos y cuidados en Guadalajara',
+    description:
+      'Consejos para cuidar tu refrigerador, reconocer fallas y evitar paros en tu negocio. Guías claras de Refrigeradores Express, Guadalajara.',
+    kicker: 'Consejos y cuidados',
+    h1: 'Blog de refrigeración',
+    lead: 'Guías cortas para cuidar tu refrigerador, reconocer a tiempo una falla y saber cuándo conviene pedir una revisión.',
+    waMsg: 'Hola, leí su blog y tengo una duda de mi refrigerador.',
+    sections: [{ type: 'posts', id: 'articulos', title: 'Artículos', kicker: 'Lo más reciente', links: ['p1', 'p2', 'p3', 'p4'] }],
+  },
+  {
+    key: 'contacto',
+    slug: 'contacto',
+    group: 'sitio',
+    kind: 'contact',
+    plain: true,
+    navName: 'Contacto',
+    title: 'Contacto: WhatsApp y teléfono | Refrigeradores Express',
+    description:
+      'Escríbenos por WhatsApp o llama al 33 1527 3735. Reparación de refrigeradores en Guadalajara, Zapopan, Tlaquepaque y Tonalá. Lun–Sáb 8–19 h.',
+    kicker: 'Habla con nosotros',
+    h1: 'Contacto',
+    lead: 'La forma más rápida es WhatsApp: cuéntanos la falla, la marca y el modelo si los tienes, y tu zona.',
+    waMsg: 'Hola, necesito revisión de mi refrigerador en Guadalajara.',
+    sections: [
+      { type: 'contact', id: 'datos', title: 'Datos de contacto', kicker: 'Así nos encuentras' },
+      { type: 'steps', id: 'proceso', title: 'Qué sigue después de escribirnos', kicker: 'Sin sorpresas', steps: STEPS },
+      {
+        type: 'faq',
+        id: 'preguntas',
+        title: 'Preguntas frecuentes',
+        kicker: 'Antes de escribirnos',
+        faqs: [FAQ_COSTO, FAQ_HORARIO, FAQ_COMO, { q: '¿En qué zonas dan servicio?', a: 'En Guadalajara (incluyendo Providencia, Americana y Country Club), Zapopan (incluyendo Andares), Tlaquepaque y Tonalá.' }],
+      },
+      { type: 'related', id: 'mas', title: 'Más del sitio', links: ['servicios', 'cobertura', 'nosotros', 'blog'] },
+    ],
+  },
+
+  // ───────────────────────── BLOG ─────────────────────────
+  {
+    key: 'p1',
+    slug: 'blog/senales-de-que-tu-refrigerador-necesita-revision',
+    group: 'blog',
+    kind: 'post',
+    plain: true,
+    parent: 'blog',
+    date: POST_DATE,
+    navName: 'Señales de que tu refrigerador necesita revisión',
+    blurb: 'Seis señales que conviene tomar en serio y qué puedes revisar tú antes de llamar.',
+    title: 'Señales de que tu refrigerador necesita revisión',
+    description:
+      'Seis señales de que tu refrigerador necesita revisión: no enfría, hace ruido, tira agua o se escarcha. Qué revisar tú y cuándo pedir ayuda.',
+    kicker: 'Blog',
+    h1: 'Señales de que tu refrigerador necesita revisión',
+    lead: 'Un refrigerador casi siempre avisa antes de dejar de funcionar. Estas son las señales que conviene tomar en serio.',
+    waMsg: 'Hola, leí su blog y creo que mi refrigerador necesita revisión.',
+    sections: [
+      {
+        type: 'list',
+        id: 'senales',
+        title: 'Seis señales a las que hay que hacerles caso',
+        items: [
+          'La comida se echa a perder más rápido de lo normal.',
+          'El interior ya no se siente tan frío como antes, aunque la puerta esté bien cerrada.',
+          'Se escucha un ruido nuevo, constante o más fuerte que antes.',
+          'Hay agua en el fondo del refrigerador o un charco debajo.',
+          'Se forma escarcha o hielo en el congelador o en las paredes.',
+          'El motor trabaja casi sin parar o la parte de atrás se siente muy caliente.',
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'revisar',
+        title: 'Qué puedes revisar tú antes de llamar',
+        paragraphs: [
+          'Comprueba que el equipo esté conectado y que haya luz en el contacto. Revisa que el control de temperatura no se haya movido y que la puerta cierre bien: el hule de la puerta debe sellar parejo, sin huecos ni partes despegadas.',
+          'Fíjate también en que la comida no tape las salidas de aire del interior. Si el equipo tiene polvo en la parte trasera o inferior, límpialo con el refrigerador desconectado.',
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'cuando',
+        title: 'Cuándo conviene escribirnos',
+        paragraphs: [
+          'Si ya revisaste lo anterior y el problema sigue, lo mejor es pedir una revisión. Si ves agua cerca de contactos eléctricos, desconecta el equipo primero.',
+          'La revisión cuesta $200. Después te explicamos qué tiene el equipo y qué se repara; tú decides antes de que empecemos.',
+        ],
+      },
+      { type: 'related', id: 'mas', title: 'Fallas y servicios', links: ['nenfria', 'ncongela', 'ruido', 'agua'] },
+    ],
+  },
+  {
+    key: 'p2',
+    slug: 'blog/cuidados-para-que-tu-refrigerador-dure-mas',
+    group: 'blog',
+    kind: 'post',
+    plain: true,
+    parent: 'blog',
+    date: POST_DATE,
+    navName: 'Cuidados para que tu refrigerador dure más',
+    blurb: 'Hábitos sencillos de limpieza, acomodo y temperatura que ayudan a que el equipo trabaje mejor.',
+    title: 'Cuidados para que tu refrigerador dure más años',
+    description:
+      'Hábitos sencillos para que tu refrigerador dure más: limpieza del sello y la parte trasera, acomodo, temperatura y espacio para ventilar.',
+    kicker: 'Blog',
+    h1: 'Cuidados para que tu refrigerador dure más',
+    lead: 'No hay trucos: unos hábitos sencillos ayudan a que el equipo trabaje con menos esfuerzo.',
+    waMsg: 'Hola, leí su blog y quiero mantenimiento para mi refrigerador.',
+    sections: [
+      {
+        type: 'list',
+        id: 'habitos',
+        title: 'Hábitos que ayudan',
+        items: [
+          'Deja unos centímetros de espacio entre el refrigerador y la pared para que ventile.',
+          'Limpia con regularidad el polvo de la parte trasera o inferior, con el equipo desconectado.',
+          'Mantén limpio el hule de la puerta y revisa que selle bien.',
+          'No lo llenes de más: el aire necesita circular entre los alimentos.',
+          'No metas comida caliente; deja que se enfríe un poco antes.',
+          'Evita abrir la puerta más tiempo del necesario.',
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'temperatura',
+        title: 'Temperatura adecuada',
+        paragraphs: [
+          'Como referencia general, el refrigerador trabaja bien alrededor de 4 °C y el congelador a −18 °C. Si ajustaste el control al máximo por costumbre, el equipo trabaja más de la cuenta sin que la comida se conserve mejor.',
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'mantenimiento',
+        title: 'Cuándo conviene un mantenimiento',
+        paragraphs: [
+          'No hay una fecha única para todos: depende de la edad del equipo y de qué tanto se usa. Si el refrigerador ya hace ruidos nuevos, tarda en enfriar o lo usas en un negocio con uso intenso, conviene revisarlo antes de que falle.',
+        ],
+      },
+      { type: 'related', id: 'mas', title: 'Servicios relacionados', links: ['man', 'dom', 'ruido', 'nenfria'] },
+    ],
+  },
+  {
+    key: 'p3',
+    slug: 'blog/se-fue-la-luz-como-cuidar-tu-refrigerador',
+    group: 'blog',
+    kind: 'post',
+    plain: true,
+    parent: 'blog',
+    date: POST_DATE,
+    navName: 'Se fue la luz: cómo cuidar tu refrigerador',
+    blurb: 'Qué hacer con la comida y con el equipo cuando hay un apagón.',
+    title: 'Se fue la luz: cómo cuidar la comida y el refrigerador',
+    description:
+      'Si se va la luz, no abras el refrigerador, cuida la comida y revisa el equipo cuando regrese. Guía rápida y cuándo pedir una revisión.',
+    kicker: 'Blog',
+    h1: 'Se fue la luz: cómo cuidar tu refrigerador',
+    lead: 'Un apagón no siempre echa a perder la comida, pero sí conviene saber qué hacer.',
+    waMsg: 'Hola, se fue la luz y mi refrigerador ya no funciona bien.',
+    sections: [
+      {
+        type: 'list',
+        id: 'durante',
+        title: 'Mientras no hay luz',
+        items: [
+          'Mantén cerradas las puertas del refrigerador y del congelador.',
+          'No abras para “ver cómo va”: cada apertura deja salir el frío.',
+          'Agrupa los alimentos y, si el apagón se alarga, usa hielo en una hielera para lo más delicado.',
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'comida',
+        title: 'Con la comida',
+        paragraphs: [
+          'Como referencia general, un refrigerador cerrado conserva el frío unas cuatro horas, y un congelador lleno puede aguantar bastante más que uno a medias. Si dudas de un alimento, es mejor no arriesgarte.',
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'regreso',
+        title: 'Cuando regresa la luz',
+        paragraphs: [
+          'Observa que el equipo arranque y empiece a enfriar con normalidad. Si no enciende, hace un ruido raro o tras unas horas sigue sin enfriar, escríbenos para una revisión. Si hubo picos de voltaje y notas algo extraño, también conviene que lo revisen.',
+        ],
+      },
+      { type: 'related', id: 'mas', title: 'Fallas y servicios', links: ['nenfria', 'ruido', 'dom', 'contacto'] },
+    ],
+  },
+  {
+    key: 'p4',
+    slug: 'blog/como-evitar-paros-en-refrigeracion-comercial',
+    group: 'blog',
+    kind: 'post',
+    plain: true,
+    parent: 'blog',
+    date: POST_DATE,
+    navName: 'Cómo evitar paros en refrigeración comercial',
+    blurb: 'Rutinas simples para restaurantes, tiendas y cocinas que no pueden parar.',
+    title: 'Cómo evitar paros en la refrigeración de tu negocio',
+    description:
+      'Rutinas simples para evitar paros en refrigeración comercial: limpieza, sellos, ventilación, registro de temperatura y mantenimiento preventivo.',
+    kicker: 'Blog',
+    h1: 'Cómo evitar paros en refrigeración comercial',
+    lead: 'En un negocio, un equipo parado es mercancía en riesgo y ventas perdidas. Estas rutinas ayudan a detectar a tiempo.',
+    waMsg: 'Hola, tengo un negocio y necesito revisar mi equipo de refrigeración.',
+    sections: [
+      {
+        type: 'list',
+        id: 'rutinas',
+        title: 'Rutinas que ayudan',
+        items: [
+          'Revisa a diario que las puertas cierren bien y que el hule esté en buen estado.',
+          'Mantén limpio el condensador y sin obstáculos las salidas de aire.',
+          'No bloquees la ventilación del equipo con cajas ni mercancía.',
+          'Anota la temperatura del equipo con regularidad: un cambio lento se nota antes en el registro.',
+          'No sobrecargues el equipo; la mercancía necesita aire alrededor.',
+          'Avisa a tiempo cuando notes ruidos nuevos, hielo de más o tiempos de enfriamiento más largos.',
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'preventivo',
+        title: 'El mantenimiento preventivo',
+        paragraphs: [
+          'Revisar el equipo antes de que falle cuesta menos que atender un paro en pleno servicio. Si tu negocio depende del frío, vale la pena tener la revisión programada.',
+        ],
+      },
+      { type: 'related', id: 'mas', title: 'Servicios para negocio', links: ['com', 'cam', 'man', 'contacto'] },
+    ],
+  },
+];
+
+export const PAGES = [...CORE, ...EXTRA];

@@ -27,6 +27,12 @@ const BLURBS = {
   ton: 'Casas y negocios en Tonalá.',
 };
 
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const fmtDate = (d) => {
+  const [y, m, day] = d.split('-').map(Number);
+  return `${day} de ${MESES[m - 1]} de ${y}`;
+};
+
 const linkText = (p) => (p.group === 'zonas' ? `Reparación de refrigeradores en ${p.navName}` : p.navName);
 
 // ───────────────────────── ICONOS ─────────────────────────
@@ -94,18 +100,34 @@ h3{font-size:clamp(26px,3.2vw,32px);line-height:1.02}
 .logo-mark{width:32px;height:32px;display:grid;place-items:center;flex:none;background:var(--g9);border-radius:var(--r)}
 .logo-mark svg{width:20px;height:20px}
 .nav{display:none}
-.nav a{display:inline-flex;align-items:center;min-height:48px;padding:0 12px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:3px solid transparent}
+.nav ul,.menu ul{padding:0;list-style:none}
+.nav>ul{display:flex;gap:0}
+.nav a{display:inline-flex;align-items:center;min-height:48px;padding:0 10px;font-size:13px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-bottom:3px solid transparent}
 .nav a:hover{border-bottom-color:var(--g9)}
-.menu{position:relative}
+.nav .has{position:relative}
+.nav .has>a::after{content:"";margin-left:7px;width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+.nav .sub{display:none;position:absolute;left:0;top:100%;min-width:290px;padding:8px;background:var(--c0);border:1px solid var(--seam);border-radius:var(--r);box-shadow:0 18px 34px rgba(21,23,26,.2)}
+.nav .has:hover>.sub,.nav .has:focus-within>.sub{display:block}
+.nav .sub a{display:flex;width:100%;padding:0 12px;font-size:14px;letter-spacing:.02em;text-transform:none;border-bottom:0}
+.nav .sub a:hover{background:var(--c2)}
+.nav .lbl{margin:8px 12px 2px;padding-top:10px;border-top:1px solid var(--seam);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.menu{position:static}
+.top-in{position:relative}
 .menu summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;min-height:48px;padding:0 14px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--seam);border-radius:var(--r)}
 .menu summary::-webkit-details-marker{display:none}
-.menu nav{position:absolute;right:0;top:100%;margin-top:8px;min-width:240px;padding:8px;background:var(--c0);border:1px solid var(--seam);border-radius:var(--r);box-shadow:0 18px 34px rgba(21,23,26,.2)}
+.menu nav{position:absolute;right:0;top:100%;margin-top:8px;width:min(86vw,320px);max-height:calc(100vh - 96px);overflow:auto;padding:8px;background:var(--c0);border:1px solid var(--seam);border-radius:var(--r);box-shadow:0 18px 34px rgba(21,23,26,.2)}
 .menu nav a{display:flex;align-items:center;min-height:48px;padding:0 12px;font-weight:600;text-decoration:none}
 .menu nav a:hover{background:var(--c2)}
+.menu .sub{margin:0 0 6px 14px;padding-left:10px;border-left:2px solid var(--seam)}
+.menu .sub a{font-weight:400}
+.menu .lbl{margin:8px 12px 2px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 
 /* Hero */
 .hero{padding:clamp(28px,6vw,72px) 0 clamp(36px,6vw,72px);border-bottom:1px solid var(--seam)}
 .hero-grid{display:grid;gap:32px}
+.meta{margin-top:14px;font-size:14px;color:var(--muted)}
+.big-v{font:600 20px/1.3 var(--body);color:var(--g9)!important}
+.big-v a{text-underline-offset:3px}
 .lead{max-width:60ch;margin-top:22px;font-size:clamp(18px,2.2vw,21px);color:#2b2f33}
 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .crumbs{margin:0 0 14px;font-size:14px}
@@ -169,7 +191,7 @@ h3{font-size:clamp(26px,3.2vw,32px);line-height:1.02}
 .cta h2 em{font-style:normal;color:var(--ice)}
 .cta p{max-width:52ch;margin-top:18px;color:#c9d2d7}
 .foot{padding:52px 0 96px;color:#c9d2d7;background:var(--g9)}
-.foot-grid{display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.foot-grid{display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(172px,1fr))}
 .foot h2{margin-bottom:10px;font:700 21px/1 var(--display);letter-spacing:.08em;color:var(--ice)}
 .foot ul{padding:0;list-style:none}
 .foot a{display:inline-flex;align-items:center;min-height:44px;color:#fff;text-decoration:none}
@@ -186,6 +208,7 @@ h3{font-size:clamp(26px,3.2vw,32px);line-height:1.02}
   .fab{display:none}
   .foot{padding-bottom:28px}
   .hero-grid{grid-template-columns:minmax(0,1.65fr) minmax(280px,.8fr);align-items:end;gap:56px}
+  .hero-grid.one{grid-template-columns:minmax(0,1fr)}
 }
 
 /* Animaciones: solo CSS, solo transform/opacity y fuera del primer pantallazo */
@@ -230,7 +253,7 @@ function renderSection(s, idx, page) {
       const cards = s.links
         .map((k, i) => {
           const p = byKey[k];
-          return `<article class="card rv"><span class="n">${String(i + 1).padStart(2, '0')}</span><h3><a href="${href(p)}">${esc(linkText(p))}</a></h3><p>${esc(BLURBS[k])}</p><span class="go" aria-hidden="true">→</span></article>`;
+          return `<article class="card rv"><span class="n">${String(i + 1).padStart(2, '0')}</span><h3><a href="${href(p)}">${esc(linkText(p))}</a></h3><p>${esc(BLURBS[k] || p.blurb)}</p><span class="go" aria-hidden="true">→</span></article>`;
         })
         .join('');
       return wrapSec(id, `${html}<div class="grid">${cards}</div>`);
@@ -263,6 +286,27 @@ function renderSection(s, idx, page) {
       const qa = s.faqs.map((f) => `<div class="qa rv"><h3>${esc(f.q)}</h3><p>${esc(f.a)}</p></div>`).join('');
       return wrapSec(id, `${html}<div>${qa}</div>`);
     }
+    case 'contact': {
+      const wa = waLink(page.waMsg);
+      const items = [
+        ['WhatsApp', `<a href="${wa}" target="_blank" rel="noopener noreferrer">${esc(SITE.phoneDisplay)}</a>`, 'La forma más rápida: cuéntanos la falla y tu zona.'],
+        ['Teléfono', `<a href="tel:${SITE.phoneTel}">${esc(SITE.phoneDisplay)}</a>`, 'Llámanos en horario de atención.'],
+        ['Horario', esc(SITE.hoursText), 'Fuera de horario, déjanos tu mensaje y te respondemos al abrir.'],
+        ['Zonas', 'Guadalajara, Zapopan, Tlaquepaque y Tonalá', 'Mira el detalle en la página de cobertura.'],
+      ]
+        .map(([h, v, n]) => `<article class="card static rv"><h3>${h}</h3><p class="big-v">${v}</p><p>${n}</p></article>`)
+        .join('');
+      return wrapSec(id, `${html}<div class="grid">${items}</div>`);
+    }
+    case 'posts': {
+      const items = s.links
+        .map((k) => {
+          const p = byKey[k];
+          return `<article class="card rv"><span class="n">${esc(fmtDate(p.date))}</span><h3><a href="${href(p)}">${esc(p.navName)}</a></h3><p>${esc(p.blurb)}</p><span class="go" aria-hidden="true">→</span></article>`;
+        })
+        .join('');
+      return wrapSec(id, `${html}<div class="grid c3">${items}</div>`);
+    }
     case 'related': {
       const chips = s.links.map((k) => `<li><a href="${href(byKey[k])}">${esc(linkText(byKey[k]))}</a></li>`).join('');
       return wrapSec(id, `${html}<ul class="chips">${chips}</ul>`);
@@ -273,7 +317,7 @@ function renderSection(s, idx, page) {
 }
 
 // ───────────────────────── JSON-LD ─────────────────────────
-function jsonLd(page, siteUrl) {
+function jsonLd(page, siteUrl, hasOg) {
   const url = `${siteUrl}${href(page)}`;
   const biz = {
     '@type': 'HVACBusiness',
@@ -296,8 +340,9 @@ function jsonLd(page, siteUrl) {
     ],
   };
   const site = { '@type': 'WebSite', '@id': `${siteUrl}/#sitio`, url: `${siteUrl}/`, name: SITE.name, inLanguage: 'es-MX', publisher: { '@id': biz['@id'] } };
+  const TYPES = { about: 'AboutPage', contact: 'ContactPage', blog: 'CollectionPage' };
   const webpage = {
-    '@type': 'WebPage',
+    '@type': TYPES[page.kind] || 'WebPage',
     '@id': `${url}#pagina`,
     url,
     name: page.title,
@@ -314,11 +359,39 @@ function jsonLd(page, siteUrl) {
       '@id': `${url}#migas`,
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${siteUrl}/` },
-        { '@type': 'ListItem', position: 2, name: page.navName, item: url },
+        ...(page.parent ? [{ '@type': 'ListItem', position: 2, name: byKey[page.parent].navName, item: `${siteUrl}${href(byKey[page.parent])}` }] : []),
+        { '@type': 'ListItem', position: page.parent ? 3 : 2, name: page.navName, item: url },
       ],
     });
     webpage.breadcrumb = { '@id': `${url}#migas` };
 
+    if (page.kind === 'post') {
+      graph.push({
+        '@type': 'BlogPosting',
+        '@id': `${url}#articulo`,
+        headline: page.h1,
+        description: page.description,
+        inLanguage: 'es-MX',
+        datePublished: page.date,
+        dateModified: page.date,
+        mainEntityOfPage: { '@id': `${url}#pagina` },
+        author: { '@id': biz['@id'] },
+        publisher: { '@id': biz['@id'] },
+        ...(hasOg ? { image: `${siteUrl}/og.jpg` } : {}),
+      });
+    }
+    if (page.kind === 'blog') {
+      graph.push({
+        '@type': 'Blog',
+        '@id': `${url}#blog`,
+        name: 'Blog de refrigeración',
+        url,
+        inLanguage: 'es-MX',
+        publisher: { '@id': biz['@id'] },
+        blogPost: PAGES.filter((p) => p.kind === 'post').map((p) => ({ '@type': 'BlogPosting', headline: p.h1, url: `${siteUrl}${href(p)}`, datePublished: p.date })),
+      });
+    }
+    const isService = ['servicios', 'zonas', 'fallas'].includes(page.group);
     const zone = page.group === 'zonas' ? [{ '@type': 'City', name: page.navName === 'Tlaquepaque' ? 'San Pedro Tlaquepaque' : page.navName }] : biz.areaServed;
     const service = {
       '@type': 'Service',
@@ -332,7 +405,7 @@ function jsonLd(page, siteUrl) {
     if (page.key !== 'man') {
       service.offers = { '@type': 'Offer', name: 'Revisión del equipo', price: SITE.price, priceCurrency: 'MXN', url };
     }
-    graph.push(service);
+    if (isService) graph.push(service);
   } else {
     biz.hasOfferCatalog = {
       '@type': 'OfferCatalog',
@@ -356,8 +429,29 @@ function jsonLd(page, siteUrl) {
 }
 
 // ───────────────────────── PÁGINA ─────────────────────────
-function navLinks() {
-  return `<a href="/#servicios">Servicios</a><a href="/#fallas">Fallas</a><a href="/#zonas">Zonas</a><a href="#contacto">Contacto</a>`;
+const SERVICE_KEYS = ['dom', 'com', 'cam', 'man'];
+const FAULT_KEYS = ['nenfria', 'ncongela', 'ruido', 'agua'];
+const ZONE_KEYS = ['zap', 'tlq', 'ton'];
+
+function navItems() {
+  const a = (k, t) => `<li><a href="${href(byKey[k])}">${esc(t || byKey[k].navName)}</a></li>`;
+  const sub = (cls, items) => `<ul class="${cls}">${items}</ul>`;
+  const servicios = `<li class="has"><a href="${href(byKey.servicios)}">Servicios</a>${sub(
+    'sub',
+    a('servicios', 'Todos los servicios') + SERVICE_KEYS.map((k) => a(k)).join('') + `<li class="lbl" aria-hidden="true">Fallas comunes</li>` + FAULT_KEYS.map((k) => a(k)).join(''),
+  )}</li>`;
+  const cobertura = `<li class="has"><a href="${href(byKey.cobertura)}">Cobertura</a>${sub(
+    'sub',
+    a('cobertura', 'Todas las zonas') + ZONE_KEYS.map((k) => a(k, linkText(byKey[k]))).join(''),
+  )}</li>`;
+  return `<li><a href="/">Inicio</a></li>${servicios}${cobertura}${a('blog')}${a('nosotros')}${a('contacto')}`;
+}
+
+function footerSite() {
+  const items = ['nosotros', 'cobertura', 'blog', 'contacto']
+    .map((k) => `<li><a href="${href(byKey[k])}">${esc(byKey[k].navName)}</a></li>`)
+    .join('');
+  return `<div><h2>El sitio</h2><ul>${items}</ul></div>`;
 }
 
 function footerCol(group) {
@@ -373,9 +467,10 @@ export function renderPage(page, ctx) {
   const wa = waLink(page.waMsg);
   const isHome = page.key === 'home';
 
+  const parent = page.parent ? byKey[page.parent] : null;
   const crumbs = isHome
     ? ''
-    : `<nav class="crumbs" aria-label="Migas de pan"><ol><li><a href="/">Inicio</a></li><li><span aria-current="page">${esc(page.navName)}</span></li></ol></nav>`;
+    : `<nav class="crumbs" aria-label="Migas de pan"><ol><li><a href="/">Inicio</a></li>${parent ? `<li><a href="${href(parent)}">${esc(parent.navName)}</a></li>` : ''}<li><span aria-current="page">${esc(page.navName)}</span></li></ol></nav>`;
 
   const gtmHead = gtmId
     ? `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${esc(gtmId)}');</script>`
@@ -414,31 +509,31 @@ ${ogImage}
 <link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>${CSS_MIN}</style>
-<script type="application/ld+json">${jsonLd(page, siteUrl)}</script>
+<script type="application/ld+json">${jsonLd(page, siteUrl, hasOg)}</script>
 ${gtmHead}
 </head>
 <body>
 ${gtmBody}<a class="skip" href="#contenido">Saltar al contenido</a>
 <header class="top"><div class="wrap top-in">
 <a class="logo" href="/" aria-label="${esc(SITE.name)}, inicio"><span class="logo-mark">${ICON_MARK}</span>${esc(SITE.name)}</a>
-<nav class="nav" aria-label="Principal">${navLinks()}</nav>
-<details class="menu"><summary>Menú</summary><nav aria-label="Menú móvil">${navLinks()}</nav></details>
+<nav class="nav" aria-label="Principal"><ul>${navItems()}</ul></nav>
+<details class="menu"><summary>Menú</summary><nav aria-label="Menú móvil"><ul>${navItems()}</ul></nav></details>
 <a class="btn btn-dark btn-sm" href="tel:${SITE.phoneTel}">Llamar</a>
 </div></header>
 <main id="contenido">
-<section class="hero" id="inicio" aria-labelledby="t-h1"><div class="wrap hero-grid">
+<section class="hero" id="inicio" aria-labelledby="t-h1"><div class="wrap hero-grid${page.plain ? ' one' : ''}">
 <div>
 ${crumbs}<p class="kicker">${esc(page.kicker)}</p>
 <h1 id="t-h1">${esc(page.h1)}</h1>
-<p class="lead">${esc(page.lead)}</p>
+<p class="lead">${esc(page.lead)}</p>${page.date ? `<p class="meta">Publicado el <time datetime="${page.date}">${esc(fmtDate(page.date))}</time></p>` : ''}
 <div class="ctas"><a class="btn btn-dark" href="${wa}" target="_blank" rel="noopener noreferrer">${ICON_WA}WhatsApp</a><a class="btn btn-line" href="tel:${SITE.phoneTel}">${ICON_TEL}Llamar ${esc(SITE.phoneDisplay)}</a></div>
 </div>
-<aside class="ficha" aria-label="Datos del servicio"><dl>
+${page.plain ? '' : `<aside class="ficha" aria-label="Datos del servicio"><dl>
 <div><dt>Revisión</dt><dd>$${SITE.price}</dd></div>
 <div><dt>Horario</dt><dd>Lun–Sáb 8–19 h</dd></div>
 <div><dt>Experiencia</dt><dd>10 años</dd></div>
 <div class="sm"><dt>Cobertura</dt><dd>Guadalajara, Zapopan, Tlaquepaque y Tonalá</dd></div>
-</dl></aside>
+</dl></aside>`}
 </div></section>
 ${body}
 <section class="cta" id="contacto" aria-labelledby="t-cta"><div class="wrap">
@@ -450,7 +545,7 @@ ${body}
 <footer class="foot"><div class="wrap">
 <div class="foot-grid">
 <div><h2>${esc(SITE.name)}</h2><p>Reparación y mantenimiento de refrigeración en Guadalajara, Zapopan, Tlaquepaque y Tonalá.</p><p><a href="tel:${SITE.phoneTel}">${esc(SITE.phoneDisplay)}</a></p><p>${esc(SITE.hoursText)}</p></div>
-${footerCol('servicios')}${footerCol('zonas')}${footerCol('fallas')}
+${footerCol('servicios')}${footerCol('zonas')}${footerCol('fallas')}${footerSite()}
 </div>
 <div class="copy"><span>© ${new Date().getFullYear()} ${esc(SITE.legalName)}</span><span>Guadalajara, Jalisco</span></div>
 </div></footer>
