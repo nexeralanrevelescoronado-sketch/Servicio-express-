@@ -1,7 +1,7 @@
 // Datos y contenido del sitio. Solo se afirma lo que el dueño confirmó:
-// 10 años de experiencia, revisión $200, Lun–Sáb 8:00–19:00 h, zonas y colonias indicadas,
-// diagnóstico claro antes de reparar. Lo demás (domicilio, tiempos de llegada, garantías, marcas)
-// NO se afirma hasta que esté confirmado.
+// 10 años de experiencia, revisión $200, Lun–Sáb 8:00–19:00 h, servicio a domicilio con llegada en 1 a 4 horas,
+// zonas Guadalajara, Zapopan y Tonalá con sus colonias, reparación de lavadoras y
+// diagnóstico claro antes de reparar. Domicilio fiscal, nombre y RFC del dueño NO se publican.
 
 export const SITE = {
   name: 'Refrigeradores Express',
@@ -18,7 +18,7 @@ export const SITE = {
 const REVISION = 'La revisión cuesta $200. Después te explicamos qué tiene el equipo y qué se repara, y tú decides antes de que empecemos.';
 
 const STEPS = [
-  { h: 'Nos escribes', p: 'Mándanos un WhatsApp con la falla y tu zona.' },
+  { h: 'Nos escribes', p: 'Mándanos un WhatsApp con la falla y tu zona; llegamos en 1 a 4 horas.' },
   { h: 'Revisión de $200', p: 'Revisamos el equipo y te decimos qué tiene.' },
   { h: 'Diagnóstico claro', p: 'Sabes qué se repara y decides antes de que empecemos.' },
 ];
@@ -30,6 +30,10 @@ const FAQ_HORARIO = {
 const FAQ_COMO = {
   q: '¿Cómo pido el servicio?',
   a: 'Por WhatsApp o por llamada al 33 1527 3735. Cuéntanos la falla, la marca y el modelo si los tienes, y tu zona.',
+};
+const FAQ_LLEGADA = {
+  q: '¿Cuánto tardan en llegar?',
+  a: 'De 1 a 4 horas desde que nos escribes, según tu zona y la carga del día. Te confirmamos la hora por WhatsApp antes de salir.',
 };
 const FAQ_COSTO = {
   q: '¿Cuánto cuesta la revisión?',
@@ -52,7 +56,7 @@ const CORE = [
     navName: 'Inicio',
     title: 'Reparación de refrigeradores en Guadalajara | Revisión $200',
     description:
-      'Reparación de refrigeradores domésticos, comerciales y cámaras en Guadalajara, Zapopan, Tlaquepaque y Tonalá. Revisión $200. Lun–Sáb 8–19 h.',
+      'Reparación de refrigeradores y lavadoras a domicilio en Guadalajara, Zapopan y Tonalá. Llegamos en 1 a 4 horas. Revisión $200. Lun–Sáb 8–19 h.',
     kicker: 'Frío que funciona',
     h1: 'Reparación de refrigeradores en Guadalajara',
     lead:
@@ -64,7 +68,7 @@ const CORE = [
         id: 'servicios',
         title: 'Servicios',
         kicker: 'Qué reparamos',
-        links: ['dom', 'com', 'cam', 'man'],
+        links: ['dom', 'com', 'cam', 'man', 'lav'],
       },
       {
         type: 'cards',
@@ -79,10 +83,9 @@ const CORE = [
         title: 'Zonas',
         kicker: 'Dónde llegamos',
         rows: [
-          { name: 'Guadalajara', note: 'Providencia · Americana · Country Club', link: null },
-          { name: 'Zapopan', note: 'Andares', link: 'zap' },
-          { name: 'Tlaquepaque', note: 'San Pedro Tlaquepaque', link: 'tlq' },
-          { name: 'Tonalá', note: 'Tonalá', link: 'ton' },
+          { name: 'Guadalajara', note: 'Centro · Independencia · Americana · Providencia · Chapalita · Country Club · Jardines del Bosque · Oblatos', link: null },
+          { name: 'Zapopan', note: 'Ciudad Granja · Jardines Universidad · Las Águilas · Puerta de Hierro · Valle Real · Andares', link: 'zap' },
+          { name: 'Tonalá', note: 'Centro de Tonalá · Loma Dorada · Santa Paula · Basilio Badillo · Rey Xólotl', link: 'ton' },
         ],
       },
       { type: 'steps', id: 'proceso', title: 'Así trabajamos', kicker: 'Sin sorpresas', steps: STEPS },
@@ -91,7 +94,7 @@ const CORE = [
         id: 'blog',
         title: 'Del blog',
         kicker: 'Consejos y cuidados',
-        links: ['p1', 'p2', 'p3', 'p4'],
+        links: ['p5', 'p6', 'p1', 'p2'],
       },
       {
         type: 'related',
@@ -106,8 +109,9 @@ const CORE = [
         kicker: 'Antes de escribirnos',
         faqs: [
           FAQ_COSTO,
-          { q: '¿Reparan refrigeradores domésticos y comerciales?', a: 'Sí. Reparamos refrigeradores de casa, equipos para restaurantes, tiendas y cocinas, y cámaras de refrigeración para negocio. También hacemos mantenimiento.' },
-          { q: '¿En qué zonas dan servicio?', a: 'En Guadalajara (incluyendo Providencia, Americana y Country Club), Zapopan (incluyendo Andares), Tlaquepaque y Tonalá.' },
+          { q: '¿Reparan refrigeradores domésticos y comerciales?', a: 'Sí. Reparamos refrigeradores de casa, equipos para restaurantes, tiendas y cocinas, y cámaras de refrigeración para negocio. También hacemos mantenimiento y reparamos lavadoras.' },
+          FAQ_LLEGADA,
+          { q: '¿En qué zonas dan servicio?', a: 'En Guadalajara (incluyendo Providencia, Americana y Country Club), Zapopan (incluyendo Andares) y Tonalá.' },
           FAQ_HORARIO,
           FAQ_COMO,
         ],
@@ -211,7 +215,7 @@ const CORE = [
         title: 'Preguntas frecuentes',
         kicker: 'Refrigeración comercial',
         faqs: [
-          { q: '¿Atienden negocios como restaurantes y tiendas?', a: 'Sí. Reparamos equipos de refrigeración para restaurantes, tiendas y cocinas en Guadalajara, Zapopan, Tlaquepaque y Tonalá.' },
+          { q: '¿Atienden negocios como restaurantes y tiendas?', a: 'Sí. Reparamos equipos de refrigeración para restaurantes, tiendas y cocinas en Guadalajara, Zapopan y Tonalá.' },
           FAQ_COSTO,
           { q: '¿Qué datos debo enviar de mi equipo?', a: 'El tipo de equipo, la falla que notas, desde cuándo ocurre, la marca y el modelo si los tienes, y tu zona.' },
           { q: '¿Hacen mantenimiento para evitar fallas?', a: 'Sí, ofrecemos mantenimiento de refrigeración para que el equipo no falle cuando más lo necesitas. Pregúntanos por WhatsApp.' },
@@ -263,7 +267,7 @@ const CORE = [
         title: 'Preguntas frecuentes',
         kicker: 'Cámaras de refrigeración',
         faqs: [
-          { q: '¿Reparan cámaras de refrigeración para negocio?', a: 'Sí, reparamos cámaras de refrigeración para negocio en Guadalajara, Zapopan, Tlaquepaque y Tonalá.' },
+          { q: '¿Reparan cámaras de refrigeración para negocio?', a: 'Sí, reparamos cámaras de refrigeración para negocio en Guadalajara, Zapopan y Tonalá.' },
           FAQ_COSTO,
           { q: '¿Qué debo decirles de mi cámara?', a: 'Qué tipo de cámara es, qué falla notas, desde cuándo y en qué zona está. Si tienes la marca y el modelo, mándalos también.' },
           FAQ_HORARIO,
@@ -324,6 +328,62 @@ const CORE = [
     ],
   },
 
+  {
+    key: 'lav',
+    slug: 'reparacion-lavadoras-guadalajara',
+    group: 'servicios',
+    navName: 'Reparación de lavadoras',
+    title: 'Reparación de lavadoras en Guadalajara | Revisión $200',
+    description:
+      'Reparación de lavadoras a domicilio en Guadalajara, Zapopan y Tonalá: no centrifuga, no drena o hace ruido. Llegamos en 1 a 4 h. Revisión $200.',
+    kicker: 'Servicio · Lavadoras',
+    h1: 'Reparación de lavadoras en Guadalajara',
+    lead:
+      'Reparamos lavadoras de carga superior y frontal a domicilio. El técnico llega en 1 a 4 horas, la revisa por $200 y te da el precio antes de reparar.',
+    waMsg: 'Hola, mi lavadora falla y necesito revisión a domicilio.',
+    sections: [
+      {
+        type: 'list',
+        title: 'Fallas que atendemos',
+        kicker: 'En lavadoras',
+        intro: 'Estas son las fallas de lavadora con las que más nos buscan en Guadalajara, Zapopan y Tonalá:',
+        items: [
+          'No centrifuga y la ropa sale empapada.',
+          'No drena: el agua se queda en el tambor.',
+          'No llena o tarda mucho en llenar.',
+          'No enciende o se detiene a medio ciclo.',
+          'Hace ruido, golpea o se mueve de lugar al girar.',
+          'Gotea o deja agua debajo.',
+          'Marca un código de error que vuelve aunque la reinicies.',
+        ],
+      },
+      {
+        type: 'prose',
+        title: 'Qué revisamos',
+        kicker: 'Diagnóstico claro',
+        paragraphs: [
+          'Revisamos la bomba de desagüe, el filtro, la manguera, la banda, la transmisión o el acople, el seguro de la tapa, el motor, el sensor de velocidad y la tarjeta electrónica. No cambiamos piezas a ciegas: primero diagnosticamos y te explicamos qué tiene la lavadora.',
+          'Para ganar tiempo, mándanos por WhatsApp la marca, si es de carga superior o frontal, una foto de la etiqueta con el modelo y, si hay, el código de error. Así el técnico puede llevar las piezas más probables.',
+          'La revisión cuesta $200. Te damos el precio de la reparación antes de empezar, reparamos ahí mismo cuando la pieza lo permite y te dejamos garantía por escrito. Facturamos y aceptamos tarjeta.',
+        ],
+      },
+      { type: 'steps', title: 'Así trabajamos', kicker: 'Sin sorpresas', steps: STEPS },
+      {
+        type: 'faq',
+        title: 'Preguntas frecuentes',
+        kicker: 'Lavadoras',
+        faqs: [
+          { q: '¿Cuánto cuesta reparar una lavadora?', a: 'Depende de la falla. La revisión cuesta $200 y con ella te damos el precio exacto de la reparación antes de empezar; tú decides.' },
+          { q: '¿Reparan lavadoras de carga frontal y de carga superior?', a: 'Sí, reparamos los dos tipos a domicilio en Guadalajara, Zapopan y Tonalá.' },
+          FAQ_LLEGADA,
+          { q: '¿Vale la pena reparar mi lavadora?', a: 'Muchas veces sí: el filtro, la manguera, la banda o el seguro de la tapa son arreglos sencillos. Si la falla es mayor, te damos el precio y te decimos con honestidad si conviene más cambiarla.' },
+          FAQ_HORARIO,
+        ],
+      },
+      { type: 'related', title: 'También te puede interesar', links: ['p5', 'zap', 'ton', 'contacto'] },
+    ],
+  },
+
   // ───────────────────────── ZONAS ─────────────────────────
   {
     key: 'zap',
@@ -332,7 +392,7 @@ const CORE = [
     navName: 'Zapopan',
     title: 'Reparación de refrigeradores en Zapopan | Revisión $200',
     description:
-      'Reparación de refrigeradores en Zapopan, incluida la zona de Andares. Casas y negocios. Revisión $200 y diagnóstico claro. Lun–Sáb 8–19 h.',
+      'Reparación de refrigeradores y lavadoras a domicilio en Zapopan: Ciudad Granja, Las Águilas, Valle Real y más. Llegamos en 1 a 4 h. Revisión $200.',
     kicker: 'Zona · Zapopan',
     h1: 'Reparación de refrigeradores en Zapopan',
     lead:
@@ -344,11 +404,13 @@ const CORE = [
         title: 'Servicio en Zapopan',
         kicker: 'Casas y negocios',
         paragraphs: [
-          'Si tu refrigerador falla en Zapopan, escríbenos por WhatsApp con la falla y tu colonia. Atendemos casas, restaurantes, tiendas y cocinas, de lunes a sábado de 8:00 a 19:00 h.',
-          'Cubrimos la zona de Andares y el resto de Zapopan. El tiempo de llegada a tu colonia te lo confirmamos cuando nos escribes.',
+          'Si tu refrigerador o tu lavadora fallan en Zapopan, escríbenos por WhatsApp con la falla y tu colonia. Atendemos casas, restaurantes, tiendas y cocinas, de lunes a sábado de 8:00 a 19:00 h, y el técnico llega en 1 a 4 horas según la zona y la carga del día; te confirmamos la hora antes de salir.',
+          'Colonias donde trabajamos con más frecuencia: Ciudad Granja, Jardines Universidad, Las Águilas, Puerta de Hierro, Valle Real, Tabachines, Arcos de Zapopan, Andares y el Centro de Zapopan. Si tu colonia no aparece, escríbenos: casi siempre llegamos.',
+          'En Zapopan hay mucho fraccionamiento y coto, y es común encontrar refrigeradores de dos puertas, dúplex y con despachador de agua o hielo. Fallan sobre todo por escarcha en el evaporador, ventiladores que dejan de girar, sensores de temperatura y fugas en la línea del despachador.',
+          'Si vives en coto, avísanos el nombre del fraccionamiento y si hay que registrar al técnico en la caseta; así llega sin perder tiempo en la entrada.',
         ],
       },
-      { type: 'cards', title: 'Qué reparamos en Zapopan', kicker: 'Servicios', links: ['dom', 'com', 'cam', 'man'] },
+      { type: 'cards', title: 'Qué reparamos en Zapopan', kicker: 'Servicios', links: ['dom', 'com', 'cam', 'man', 'lav'] },
       {
         type: 'list',
         title: 'Para agilizar la visita',
@@ -368,63 +430,13 @@ const CORE = [
         kicker: 'Zapopan',
         faqs: [
           { q: '¿Atienden en Andares?', a: 'Sí, atendemos la zona de Andares y el resto de Zapopan.' },
+          FAQ_LLEGADA,
           { q: '¿Cuánto cuesta la revisión en Zapopan?', a: REVISION },
           { q: '¿También reparan equipos de negocio en Zapopan?', a: 'Sí. Reparamos refrigeradores comerciales y cámaras de refrigeración para restaurantes, tiendas y cocinas.' },
           FAQ_COMO,
         ],
       },
-      { type: 'related', title: 'Otras zonas', links: ['tlq', 'ton'] },
-    ],
-  },
-  {
-    key: 'tlq',
-    slug: 'reparacion-refrigeradores-tlaquepaque',
-    group: 'zonas',
-    navName: 'Tlaquepaque',
-    title: 'Reparación de refrigeradores en Tlaquepaque | Revisión $200',
-    description:
-      'Reparación de refrigeradores en Tlaquepaque: casas y negocios. Revisión $200 y diagnóstico claro antes de reparar. Lun–Sáb 8–19 h.',
-    kicker: 'Zona · Tlaquepaque',
-    h1: 'Reparación de refrigeradores en Tlaquepaque',
-    lead:
-      'Si tu refrigerador o el equipo de tu negocio falla en San Pedro Tlaquepaque, lo revisamos por $200 y te damos un diagnóstico claro antes de reparar.',
-    waMsg: 'Hola, necesito revisión de mi refrigerador en Tlaquepaque.',
-    sections: [
-      {
-        type: 'prose',
-        title: 'Servicio en Tlaquepaque',
-        kicker: 'Casas y negocios',
-        paragraphs: [
-          'Damos servicio en Tlaquepaque a refrigeradores de casa, equipos de restaurantes y tiendas, y cámaras de refrigeración. Atendemos de lunes a sábado de 8:00 a 19:00 h.',
-          'Escríbenos tu colonia junto con la falla del equipo. Así te confirmamos la visita y el tiempo de llegada.',
-        ],
-      },
-      { type: 'cards', title: 'Qué reparamos en Tlaquepaque', kicker: 'Servicios', links: ['dom', 'com', 'cam', 'man'] },
-      {
-        type: 'list',
-        title: 'Cómo describir la falla',
-        kicker: 'Para diagnosticar mejor',
-        intro: 'Cuanto más claro describas la falla, más rápido empezamos:',
-        items: [
-          '¿El equipo enfría poco, no enfría o no congela?',
-          '¿Hace ruido? Descríbelo: zumbido, rechinido, golpeteo o clics.',
-          '¿Hay agua dentro o debajo del refrigerador?',
-          '¿Desde cuándo pasa y fue de repente o poco a poco?',
-        ],
-      },
-      { type: 'steps', title: 'Así trabajamos', kicker: 'Sin sorpresas', steps: STEPS },
-      {
-        type: 'faq',
-        title: 'Preguntas frecuentes',
-        kicker: 'Tlaquepaque',
-        faqs: [
-          { q: '¿Atienden en todo Tlaquepaque?', a: 'Damos servicio en Tlaquepaque. Escríbenos tu colonia por WhatsApp y te confirmamos la visita.' },
-          { q: '¿Cuánto cuesta la revisión en Tlaquepaque?', a: REVISION },
-          { q: '¿Reparan equipos de restaurantes y tiendas?', a: 'Sí. Reparamos refrigeradores comerciales y cámaras de refrigeración para negocio.' },
-          FAQ_HORARIO,
-        ],
-      },
-      { type: 'related', title: 'Otras zonas', links: ['zap', 'ton'] },
+      { type: 'related', title: 'Otras zonas', links: ['ton', 'cobertura', 'lav'] },
     ],
   },
   {
@@ -434,7 +446,7 @@ const CORE = [
     navName: 'Tonalá',
     title: 'Reparación de refrigeradores en Tonalá | Revisión $200',
     description:
-      'Reparación de refrigeradores en Tonalá para casas y negocios. Revisión $200 y diagnóstico claro antes de reparar. Lun–Sáb 8–19 h.',
+      'Reparación de refrigeradores y lavadoras a domicilio en Tonalá: Centro, Loma Dorada, Santa Paula y más. Llegamos en 1 a 4 h. Revisión $200.',
     kicker: 'Zona · Tonalá',
     h1: 'Reparación de refrigeradores en Tonalá',
     lead:
@@ -446,11 +458,12 @@ const CORE = [
         title: 'Servicio en Tonalá',
         kicker: 'Casas y negocios',
         paragraphs: [
-          'En Tonalá atendemos refrigeradores de casa, equipos de negocio y cámaras de refrigeración. Nuestro horario es de lunes a sábado, de 8:00 a 19:00 h.',
-          'Mándanos por WhatsApp la falla y tu colonia, y te confirmamos cómo y cuándo podemos revisar el equipo.',
+          'En Tonalá atendemos refrigeradores de casa, enfriadores de negocio, vitrinas, cámaras de refrigeración y lavadoras, de lunes a sábado de 8:00 a 19:00 h. El técnico llega en 1 a 4 horas desde que nos contactas, y antes de salir te confirmamos la hora por WhatsApp.',
+          'Colonias que cubrimos en Tonalá: Centro de Tonalá, Jalisco, Loma Dorada, Santa Paula, Basilio Badillo, Rey Xólotl y Lomas de la Soledad. Si estás en otra colonia del municipio, pregúntanos.',
+          'Tonalá combina casas familiares con mucho comercio: abarrotes, fondas, cremerías y negocios de artesanía cerca del centro y del tianguis. Los enfriadores de tienda trabajan todo el día con la puerta abriéndose a cada rato, y en temporada de calor el condensador se llena de polvo y el compresor trabaja de más. Un mantenimiento a tiempo evita que se te eche a perder la mercancía.',
         ],
       },
-      { type: 'cards', title: 'Qué reparamos en Tonalá', kicker: 'Servicios', links: ['dom', 'com', 'cam', 'man'] },
+      { type: 'cards', title: 'Qué reparamos en Tonalá', kicker: 'Servicios', links: ['dom', 'com', 'cam', 'man', 'lav'] },
       {
         type: 'list',
         title: 'Antes de escribirnos',
@@ -470,12 +483,13 @@ const CORE = [
         kicker: 'Tonalá',
         faqs: [
           { q: '¿Dan servicio en Tonalá?', a: 'Sí, damos servicio en Tonalá. Escríbenos tu colonia por WhatsApp para confirmarte la visita.' },
+          FAQ_LLEGADA,
           { q: '¿Cuánto cuesta la revisión en Tonalá?', a: REVISION },
           { q: '¿Reparan cámaras de refrigeración en Tonalá?', a: 'Sí, reparamos cámaras de refrigeración para negocio. Cuéntanos qué tipo de cámara es y qué falla presenta.' },
           FAQ_COMO,
         ],
       },
-      { type: 'related', title: 'Otras zonas', links: ['zap', 'tlq'] },
+      { type: 'related', title: 'Otras zonas', links: ['zap', 'cobertura', 'lav'] },
     ],
   },
 
@@ -756,7 +770,7 @@ const EXTRA = [
     lead: 'Refrigeradores de casa, equipos de negocio y cámaras de refrigeración. Elige tu caso o la falla que tienes y ve directo a la página que te explica qué hacer.',
     waMsg: 'Hola, quiero información de sus servicios de reparación de refrigeradores.',
     sections: [
-      { type: 'cards', id: 'tipos', title: 'Por tipo de equipo', kicker: 'Qué reparamos', links: ['dom', 'com', 'cam', 'man'] },
+      { type: 'cards', id: 'tipos', title: 'Por tipo de equipo', kicker: 'Qué reparamos', links: ['dom', 'com', 'cam', 'man', 'lav'] },
       { type: 'cards', id: 'por-falla', title: 'Por falla', kicker: 'Lo que más nos escriben', links: ['nenfria', 'ncongela', 'ruido', 'agua'] },
       { type: 'steps', id: 'proceso', title: 'Así trabajamos', kicker: 'Sin sorpresas', steps: STEPS },
       { type: 'related', id: 'mas', title: 'Más del sitio', links: ['cobertura', 'nosotros', 'blog', 'contacto'] },
@@ -768,12 +782,12 @@ const EXTRA = [
     group: 'sitio',
     kind: 'info',
     navName: 'Cobertura',
-    title: 'Cobertura: Guadalajara, Zapopan, Tlaquepaque y Tonalá',
+    title: 'Cobertura: Guadalajara, Zapopan y Tonalá',
     description:
-      'Reparación de refrigeradores en Guadalajara, Zapopan, Tlaquepaque y Tonalá. Mira las zonas que atendemos y escríbenos por WhatsApp. Lun–Sáb 8–19 h.',
+      'Reparación de refrigeradores en Guadalajara, Zapopan y Tonalá. Mira las zonas que atendemos y escríbenos por WhatsApp. Lun–Sáb 8–19 h.',
     kicker: 'Dónde llegamos',
     h1: 'Zonas donde reparamos refrigeradores',
-    lead: 'Atendemos la zona metropolitana de Guadalajara. Entra a tu zona para ver las fallas más comunes y cómo pedir el servicio.',
+    lead: 'Vamos a domicilio en Guadalajara, Zapopan y Tonalá y llegamos en 1 a 4 horas. Entra a tu zona para ver las colonias y cómo pedir el servicio.',
     waMsg: 'Hola, quiero saber si dan servicio en mi zona.',
     sections: [
       {
@@ -782,10 +796,9 @@ const EXTRA = [
         title: 'Zonas',
         kicker: 'Zona metropolitana',
         rows: [
-          { name: 'Guadalajara', note: 'Providencia · Americana · Country Club', link: null },
-          { name: 'Zapopan', note: 'Andares', link: 'zap' },
-          { name: 'Tlaquepaque', note: 'San Pedro Tlaquepaque', link: 'tlq' },
-          { name: 'Tonalá', note: 'Tonalá', link: 'ton' },
+          { name: 'Guadalajara', note: 'Centro · Independencia · Americana · Providencia · Chapalita · Country Club · Jardines del Bosque · Oblatos', link: null },
+          { name: 'Zapopan', note: 'Ciudad Granja · Jardines Universidad · Las Águilas · Puerta de Hierro · Valle Real · Andares', link: 'zap' },
+          { name: 'Tonalá', note: 'Centro de Tonalá · Loma Dorada · Santa Paula · Basilio Badillo · Rey Xólotl', link: 'ton' },
         ],
       },
       {
@@ -809,7 +822,7 @@ const EXTRA = [
     navName: 'Nosotros',
     title: 'Nosotros | 10 años reparando refrigeradores en Guadalajara',
     description:
-      'Conoce Refrigeradores Express: diez años reparando refrigeradores domésticos, comerciales y cámaras en Guadalajara, con revisión de $200 y diagnóstico claro.',
+      'Refrigeradores Express: diez años reparando refrigeradores y lavadoras en Guadalajara, Zapopan y Tonalá. Revisión de $200 y diagnóstico claro.',
     kicker: 'Quiénes somos',
     h1: 'Diez años reparando refrigeradores en Guadalajara',
     lead: 'Somos Refrigeradores Express. Reparamos y damos mantenimiento a refrigeradores de casa, equipos de negocio y cámaras de refrigeración.',
@@ -821,7 +834,7 @@ const EXTRA = [
         title: 'Lo que hacemos',
         kicker: 'Nuestro trabajo',
         paragraphs: [
-          'Llevamos diez años en la reparación de refrigeración en Guadalajara, Zapopan, Tlaquepaque y Tonalá. Atendemos refrigeradores domésticos, equipos comerciales para restaurantes, tiendas y cocinas, y cámaras de refrigeración. También hacemos mantenimiento.',
+          'Llevamos diez años en la reparación de refrigeración en Guadalajara, Zapopan y Tonalá. Atendemos refrigeradores domésticos, equipos comerciales para restaurantes, tiendas y cocinas, y cámaras de refrigeración. También hacemos mantenimiento.',
           'Sabemos que un refrigerador descompuesto no puede esperar: la comida se echa a perder y, en un negocio, cada hora parada cuesta. Por eso la atención es directa, por WhatsApp o por llamada.',
         ],
       },
@@ -836,10 +849,11 @@ const EXTRA = [
           'Tú decides antes de que empecemos.',
           'Nos escribes o nos llamas directo, sin intermediarios.',
           'Atendemos de lunes a sábado, de 8:00 a 19:00 h.',
-          'Cubrimos Guadalajara, Zapopan, Tlaquepaque y Tonalá.',
+          'Cubrimos Guadalajara, Zapopan y Tonalá, y llegamos en 1 a 4 horas.',
+          'También reparamos lavadoras de carga superior y frontal.',
         ],
       },
-      { type: 'cards', id: 'servicios', title: 'Servicios', kicker: 'Qué reparamos', links: ['dom', 'com', 'cam', 'man'] },
+      { type: 'cards', id: 'servicios', title: 'Servicios', kicker: 'Qué reparamos', links: ['dom', 'com', 'cam', 'man', 'lav'] },
       { type: 'related', id: 'mas', title: 'Más del sitio', links: ['servicios', 'cobertura', 'blog', 'contacto'] },
     ],
   },
@@ -857,7 +871,7 @@ const EXTRA = [
     h1: 'Blog de refrigeración',
     lead: 'Guías cortas para cuidar tu refrigerador, reconocer a tiempo una falla y saber cuándo conviene pedir una revisión.',
     waMsg: 'Hola, leí su blog y tengo una duda de mi refrigerador.',
-    sections: [{ type: 'posts', id: 'articulos', title: 'Artículos', kicker: 'Lo más reciente', links: ['p1', 'p2', 'p3', 'p4'] }],
+    sections: [{ type: 'posts', id: 'articulos', title: 'Artículos', kicker: 'Lo más reciente', links: ['p5', 'p6', 'p1', 'p2', 'p3', 'p4'] }],
   },
   {
     key: 'contacto',
@@ -868,7 +882,7 @@ const EXTRA = [
     navName: 'Contacto',
     title: 'Contacto: WhatsApp y teléfono | Refrigeradores Express',
     description:
-      'Escríbenos por WhatsApp o llama al 33 1527 3735. Reparación de refrigeradores en Guadalajara, Zapopan, Tlaquepaque y Tonalá. Lun–Sáb 8–19 h.',
+      'Escríbenos por WhatsApp o llama al 33 1527 3735. Reparación de refrigeradores en Guadalajara, Zapopan y Tonalá. Lun–Sáb 8–19 h.',
     kicker: 'Habla con nosotros',
     h1: 'Contacto',
     lead: 'La forma más rápida es WhatsApp: cuéntanos la falla, la marca y el modelo si los tienes, y tu zona.',
@@ -881,7 +895,7 @@ const EXTRA = [
         id: 'preguntas',
         title: 'Preguntas frecuentes',
         kicker: 'Antes de escribirnos',
-        faqs: [FAQ_COSTO, FAQ_HORARIO, FAQ_COMO, { q: '¿En qué zonas dan servicio?', a: 'En Guadalajara (incluyendo Providencia, Americana y Country Club), Zapopan (incluyendo Andares), Tlaquepaque y Tonalá.' }],
+        faqs: [FAQ_COSTO, FAQ_LLEGADA, FAQ_HORARIO, FAQ_COMO, { q: '¿En qué zonas dan servicio?', a: 'En Guadalajara (incluyendo Providencia, Americana y Country Club), Zapopan (incluyendo Andares) y Tonalá.' }],
       },
       { type: 'related', id: 'mas', title: 'Más del sitio', links: ['servicios', 'cobertura', 'nosotros', 'blog'] },
     ],
@@ -1077,6 +1091,191 @@ const EXTRA = [
         ],
       },
       { type: 'related', id: 'mas', title: 'Servicios para negocio', links: ['com', 'cam', 'man', 'contacto'] },
+    ],
+  },
+  {
+    key: 'p5',
+    slug: 'blog/lavadora-que-no-centrifuga',
+    group: 'blog',
+    kind: 'post',
+    plain: true,
+    parent: 'blog',
+    date: POST_DATE,
+    navName: 'Lavadora que no centrifuga: causas y qué revisar',
+    blurb: 'Las siete causas más comunes, qué revisar tú sin riesgo y cuándo llamar al técnico.',
+    title: 'Lavadora que no centrifuga: causas y qué revisar',
+    description:
+      'Tu lavadora lava pero no centrifuga y la ropa sale empapada. Causas comunes, qué revisar tú sin riesgo y cuándo pedir técnico en Guadalajara.',
+    kicker: 'Blog',
+    h1: 'Lavadora que no centrifuga: causas y qué revisar',
+    lead: 'Si tu lavadora llena, lava y enjuaga, pero la ropa sale empapada, el problema está en el centrifugado. Es una falla común y no siempre es cara.',
+    waMsg: 'Hola, leí su blog: mi lavadora no centrifuga y necesito revisión.',
+    sections: [
+      {
+        type: 'prose',
+        id: 'antes',
+        title: 'Primero lo primero',
+        paragraphs: [
+          'Desconecta la lavadora antes de mover o revisar cualquier cosa. Si tiene agua, sácala con cuidado por el filtro o la manguera de desagüe, con una cubeta y trapos a la mano.',
+        ],
+      },
+      {
+        type: 'causes',
+        id: 'causas',
+        title: 'Las causas más comunes',
+        intro: 'Estas son las que más vemos en Guadalajara, Zapopan y Tonalá:',
+        items: [
+          { h: 'Carga mal repartida', p: 'Una cobija sola o pocas prendas pesadas se van a un lado; la lavadora detecta el desbalance y no centrifuga para protegerse.' },
+          { h: 'No terminó de drenar', p: 'Casi ninguna centrifuga con agua en el tambor: filtro tapado, manguera doblada o bomba de desagüe que ya no trabaja.' },
+          { h: 'Tapa o puerta que no cierra', p: 'Si el seguro no confirma que la tapa está cerrada, la lavadora no se atreve a girar rápido.' },
+          { h: 'Banda floja o rota', p: 'El motor gira pero el tambor apenas se mueve, y a veces huele a hule quemado.' },
+          { h: 'Transmisión, acople o clutch', p: 'En carga superior pasan la fuerza del motor al tambor; desgastados, lava pero no centrifuga o hace ruido fuerte.' },
+          { h: 'Motor, sensor o tarjeta', p: 'En lavadoras modernas pueden marcar un código de error y dejar la lavadora quieta. Aquí ya no conviene probar por tu cuenta.' },
+          { h: 'Programa equivocado', p: 'Algunos ciclos delicados centrifugan muy suave y hay lavadoras con opción de quitar el centrifugado. Revísalo antes de pensar en una falla.' },
+        ],
+      },
+      {
+        type: 'list',
+        id: 'revisar',
+        title: 'Qué puedes revisar tú',
+        items: [
+          'Reacomoda la ropa pareja y corre solo el ciclo de centrifugado.',
+          'Revisa que la manguera de desagüe no esté doblada ni metida de más en el tubo.',
+          'Limpia el filtro de la bomba si tu lavadora lo tiene al frente, abajo. Pon trapos porque sale agua.',
+          'Revisa el programa y la velocidad de centrifugado elegidos.',
+          'Anota el código de error si la pantalla muestra uno; sirve mucho para el diagnóstico.',
+        ],
+      },
+      {
+        type: 'list',
+        id: 'tecnico',
+        title: 'Señales de que ya necesitas técnico',
+        intro: 'Si después de revisar lo anterior sigue igual, no fuerces el equipo: correr ciclos con el tambor desbalanceado o con agua puede dañar la bomba, la transmisión o la suspensión. Llama si notas:',
+        items: [
+          'Zumbido sin que salga el agua.',
+          'Olor a quemado o a hule.',
+          'Golpes fuertes, rechinidos o el tambor flojo al moverlo con la mano.',
+          'Un código de error que vuelve aunque reinicies.',
+          'Agua debajo de la lavadora.',
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'servicio',
+        title: 'Cómo lo resolvemos',
+        paragraphs: [
+          'Reparamos lavadoras de carga superior y frontal a domicilio en Guadalajara, Zapopan y Tonalá. Llegamos en 1 a 4 horas desde que nos escribes, de lunes a sábado de 8:00 a 19:00. La revisión cuesta $200; te damos el precio de la reparación antes de empezar y tú decides. Si la pieza lo permite, reparamos ahí mismo y te dejamos garantía por escrito.',
+          'Para ganar tiempo, mándanos por WhatsApp la marca, si es de carga superior o frontal, una foto de la etiqueta con el modelo y el código de error si hay.',
+        ],
+      },
+      {
+        type: 'faq',
+        id: 'preguntas',
+        title: 'Preguntas frecuentes',
+        faqs: [
+          { q: '¿Vale la pena reparar una lavadora que no centrifuga?', a: 'Muchas veces sí: el filtro, la manguera, la banda o el seguro de la tapa son arreglos sencillos. Si la falla está en la transmisión o la tarjeta, te damos el precio y te decimos con honestidad si conviene más cambiarla.' },
+          { q: '¿Puedo usarla mientras tanto?', a: 'Puedes lavar y exprimir a mano, pero evita correr ciclos completos si no drena o si hace ruidos fuertes.' },
+        ],
+      },
+      { type: 'related', id: 'mas', title: 'Servicios relacionados', links: ['lav', 'zap', 'ton', 'contacto'] },
+    ],
+  },
+  {
+    key: 'p6',
+    slug: 'blog/cuanto-dura-un-refrigerador',
+    group: 'blog',
+    kind: 'post',
+    plain: true,
+    parent: 'blog',
+    date: POST_DATE,
+    navName: 'Cuánto dura un refrigerador y cuándo conviene repararlo',
+    blurb: 'Qué lo desgasta, qué fallas casi siempre conviene reparar y cuándo hacer cuentas.',
+    title: 'Cuánto dura un refrigerador y cuándo conviene repararlo',
+    description:
+      '¿Reparar o comprar uno nuevo? Cuánto suele durar un refrigerador, qué lo desgasta, qué fallas conviene reparar y cuándo hacer cuentas.',
+    kicker: 'Blog',
+    h1: 'Cuánto dura un refrigerador y cuándo conviene repararlo',
+    lead: 'Cuando el refrigerador empieza a fallar, la pregunta de siempre es si repararlo o comprar uno nuevo. No hay una respuesta única, pero sí una forma de decidir sin ir a ciegas.',
+    waMsg: 'Hola, leí su blog y quiero saber si conviene reparar mi refrigerador.',
+    sections: [
+      {
+        type: 'prose',
+        id: 'cuanto',
+        title: 'Cuánto dura un refrigerador',
+        paragraphs: [
+          'Un refrigerador doméstico bien cuidado suele durar muchos años, con frecuencia más de una década. Lo que más cambia esa cifra no es la marca, sino cómo se usa y dónde está. En Guadalajara, el calor de abril y mayo hace que el compresor trabaje más horas, y un equipo pegado a la pared o junto a la estufa sufre todavía más.',
+        ],
+      },
+      {
+        type: 'list',
+        id: 'desgasta',
+        title: 'Lo que acorta su vida',
+        items: [
+          'Poca ventilación atrás y a los lados: el calor del condensador no tiene a dónde salir.',
+          'Condensador lleno de polvo o pelusa de mascotas.',
+          'Empaques de la puerta rotos o aplastados, que dejan entrar aire caliente.',
+          'Variaciones de voltaje y apagones frecuentes, que castigan al compresor y a la tarjeta.',
+          'Llenarlo de más, tapando las salidas de aire frío.',
+          'Abrir la puerta muchas veces o dejarla mal cerrada.',
+        ],
+      },
+      {
+        type: 'list',
+        id: 'reparar',
+        title: 'Fallas que casi siempre conviene reparar',
+        intro: 'Muchas fallas tienen arreglo y cuestan bastante menos que un equipo nuevo:',
+        items: [
+          'Empaque de la puerta.',
+          'Termostato o sensor de temperatura.',
+          'Ventilador del evaporador o del condensador.',
+          'Resistencia o temporizador de deshielo, cuando se forma escarcha arriba y abajo deja de enfriar.',
+          'Relevador o protector térmico del compresor, cuando hace clic y no arranca.',
+          'Limpieza de condensador y revisión general.',
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'cuentas',
+        title: 'Cuándo hay que hacer cuentas',
+        paragraphs: [
+          'En reparaciones mayores, como el cambio de compresor, una fuga de gas en una zona difícil de alcanzar o la tarjeta electrónica principal, conviene comparar con calma.',
+          'Una regla práctica: si la reparación cuesta cerca de la mitad de un refrigerador nuevo equivalente y tu equipo ya tiene muchos años, piénsalo dos veces. Si es relativamente nuevo, o es un modelo grande, dúplex o con despachador, normalmente sale más a cuenta repararlo.',
+          'Ayuda preguntarte si es la primera falla o ya van varias, si el resto del equipo está bien (puertas, interior y empaques sin óxido) y cuánto gastarías en uno nuevo del mismo tamaño y con las mismas funciones.',
+        ],
+      },
+      {
+        type: 'list',
+        id: 'senales',
+        title: 'Señales de que algo va mal',
+        intro: 'Atenderlas a tiempo suele salir más barato que esperar a que deje de enfriar por completo:',
+        items: [
+          'El motor trabaja casi todo el día y casi no descansa.',
+          'Se forma escarcha gruesa en el congelador o en la pared del fondo.',
+          'Gotea agua por dentro o hay charcos debajo.',
+          'Hace ruidos nuevos: zumbidos, golpes o un clic repetido.',
+          'Los costados o el frente se sienten muy calientes.',
+          'La comida dura menos que antes o el hielo tarda mucho en hacerse.',
+        ],
+      },
+      {
+        type: 'prose',
+        id: 'servicio',
+        title: 'Cómo te ayudamos a decidir',
+        paragraphs: [
+          'Atendemos refrigeradores domésticos y comerciales a domicilio en Guadalajara, Zapopan y Tonalá, con llegada en 1 a 4 horas. La revisión cuesta $200: te explicamos la falla, te damos el precio antes de empezar y, si no conviene reparar, te lo decimos con honestidad. Si reparamos, te dejamos garantía por escrito.',
+          'Si no enfría, ábrelo lo menos posible y pasa lo más delicado, como carne y lácteos, a una hielera mientras llega el técnico.',
+        ],
+      },
+      {
+        type: 'faq',
+        id: 'preguntas',
+        title: 'Preguntas frecuentes',
+        faqs: [
+          { q: '¿Cada cuánto conviene dar mantenimiento?', a: 'Una limpieza de condensador y revisión de empaques al menos una vez al año ayuda mucho, sobre todo antes de la temporada de calor. En negocios con uso intenso, conviene más seguido.' },
+          { q: '¿Un refrigerador viejo gasta más luz?', a: 'Suele gastar más, sobre todo si el empaque no sella o el condensador está sucio. Un mantenimiento puede bajar el consumo.' },
+        ],
+      },
+      { type: 'related', id: 'mas', title: 'Servicios relacionados', links: ['dom', 'man', 'nenfria', 'cobertura'] },
     ],
   },
 ];

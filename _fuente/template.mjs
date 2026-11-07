@@ -18,13 +18,13 @@ const BLURBS = {
   com: 'Equipos para restaurantes, tiendas y cocinas que no pueden parar.',
   cam: 'Reparación de cámaras de refrigeración para negocio.',
   man: 'Mantenimiento para que el equipo no falle cuando más lo necesitas.',
+  lav: 'Lavadoras que no centrifugan, no drenan o hacen ruido. Revisión $200.',
   nenfria: 'Causas comunes, qué revisar tú y cuándo llamar.',
   ncongela: 'Escarcha, hielo y congelador que no congela.',
   ruido: 'Qué significa cada ruido y cuándo conviene revisarlo.',
   agua: 'Charcos, goteo y agua dentro del equipo.',
-  zap: 'Casas y negocios, incluida la zona de Andares.',
-  tlq: 'Casas y negocios en San Pedro Tlaquepaque.',
-  ton: 'Casas y negocios en Tonalá.',
+  zap: 'Ciudad Granja, Las Águilas, Puerta de Hierro, Valle Real y más.',
+  ton: 'Centro de Tonalá, Loma Dorada, Santa Paula, Rey Xólotl y más.',
 };
 
 const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
@@ -292,7 +292,7 @@ function renderSection(s, idx, page) {
         ['WhatsApp', `<a href="${wa}" target="_blank" rel="noopener noreferrer">${esc(SITE.phoneDisplay)}</a>`, 'La forma más rápida: cuéntanos la falla y tu zona.'],
         ['Teléfono', `<a href="tel:${SITE.phoneTel}">${esc(SITE.phoneDisplay)}</a>`, 'Llámanos en horario de atención.'],
         ['Horario', esc(SITE.hoursText), 'Fuera de horario, déjanos tu mensaje y te respondemos al abrir.'],
-        ['Zonas', 'Guadalajara, Zapopan, Tlaquepaque y Tonalá', 'Mira el detalle en la página de cobertura.'],
+        ['Zonas', 'Guadalajara, Zapopan y Tonalá', 'Llegamos en 1 a 4 horas. Mira el detalle en la página de cobertura.'],
       ]
         .map(([h, v, n]) => `<article class="card static rv"><h3>${h}</h3><p class="big-v">${v}</p><p>${n}</p></article>`)
         .join('');
@@ -327,9 +327,9 @@ function jsonLd(page, siteUrl, hasOg) {
     url: `${siteUrl}/`,
     telephone: '+52 33 1527 3735',
     description:
-      'Reparación y mantenimiento de refrigeradores domésticos, comerciales y cámaras de refrigeración en la zona metropolitana de Guadalajara.',
+      'Reparación y mantenimiento de refrigeradores domésticos, comerciales, cámaras de refrigeración y lavadoras a domicilio en Guadalajara, Zapopan y Tonalá.',
     address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.region, addressCountry: 'MX' },
-    areaServed: ['Guadalajara', 'Zapopan', 'San Pedro Tlaquepaque', 'Tonalá'].map((n) => ({ '@type': 'City', name: n })),
+    areaServed: ['Guadalajara', 'Zapopan', 'Tonalá'].map((n) => ({ '@type': 'City', name: n })),
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
@@ -392,7 +392,7 @@ function jsonLd(page, siteUrl, hasOg) {
       });
     }
     const isService = ['servicios', 'zonas', 'fallas'].includes(page.group);
-    const zone = page.group === 'zonas' ? [{ '@type': 'City', name: page.navName === 'Tlaquepaque' ? 'San Pedro Tlaquepaque' : page.navName }] : biz.areaServed;
+    const zone = page.group === 'zonas' ? [{ '@type': 'City', name: page.navName }] : biz.areaServed;
     const service = {
       '@type': 'Service',
       '@id': `${url}#servicio`,
@@ -429,9 +429,9 @@ function jsonLd(page, siteUrl, hasOg) {
 }
 
 // ───────────────────────── PÁGINA ─────────────────────────
-const SERVICE_KEYS = ['dom', 'com', 'cam', 'man'];
+const SERVICE_KEYS = ['dom', 'com', 'cam', 'man', 'lav'];
 const FAULT_KEYS = ['nenfria', 'ncongela', 'ruido', 'agua'];
-const ZONE_KEYS = ['zap', 'tlq', 'ton'];
+const ZONE_KEYS = ['zap', 'ton'];
 
 function navItems() {
   const a = (k, t) => `<li><a href="${href(byKey[k])}">${esc(t || byKey[k].navName)}</a></li>`;
@@ -531,8 +531,8 @@ ${crumbs}<p class="kicker">${esc(page.kicker)}</p>
 ${page.plain ? '' : `<aside class="ficha" aria-label="Datos del servicio"><dl>
 <div><dt>Revisión</dt><dd>$${SITE.price}</dd></div>
 <div><dt>Horario</dt><dd>Lun–Sáb 8–19 h</dd></div>
-<div><dt>Experiencia</dt><dd>10 años</dd></div>
-<div class="sm"><dt>Cobertura</dt><dd>Guadalajara, Zapopan, Tlaquepaque y Tonalá</dd></div>
+<div><dt>Llegada</dt><dd>1 a 4 h</dd></div>
+<div class="sm"><dt>Cobertura</dt><dd>Guadalajara, Zapopan y Tonalá</dd></div>
 </dl></aside>`}
 </div></section>
 ${body}
@@ -544,7 +544,7 @@ ${body}
 </main>
 <footer class="foot"><div class="wrap">
 <div class="foot-grid">
-<div><h2>${esc(SITE.name)}</h2><p>Reparación y mantenimiento de refrigeración en Guadalajara, Zapopan, Tlaquepaque y Tonalá.</p><p><a href="tel:${SITE.phoneTel}">${esc(SITE.phoneDisplay)}</a></p><p>${esc(SITE.hoursText)}</p></div>
+<div><h2>${esc(SITE.name)}</h2><p>Reparación de refrigeradores y lavadoras a domicilio en Guadalajara, Zapopan y Tonalá. Llegamos en 1 a 4 horas.</p><p><a href="tel:${SITE.phoneTel}">${esc(SITE.phoneDisplay)}</a></p><p>${esc(SITE.hoursText)}</p></div>
 ${footerCol('servicios')}${footerCol('zonas')}${footerCol('fallas')}${footerSite()}
 </div>
 <div class="copy"><span>© ${new Date().getFullYear()} ${esc(SITE.legalName)}</span><span>Guadalajara, Jalisco</span></div>

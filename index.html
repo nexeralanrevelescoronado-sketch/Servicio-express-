@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Reparación de refrigeradores en Guadalajara | Revisión $200</title>
-<meta name="description" content="Reparación de refrigeradores domésticos, comerciales y cámaras en Guadalajara, Zapopan, Tlaquepaque y Tonalá. Revisión $200. Lun–Sáb 8–19 h.">
+<meta name="description" content="Reparación de refrigeradores y lavadoras a domicilio en Guadalajara, Zapopan y Tonalá. Llegamos en 1 a 4 horas. Revisión $200. Lun–Sáb 8–19 h.">
 <meta name="theme-color" content="#B4582E">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://refrigeradores-express-gdl.onrender.com/">
@@ -29,14 +29,13 @@
   "url": "https://refrigeradores-express-gdl.onrender.com/",
   "name": "Refrigeradores Express",
   "alternateName": "Servicios de reparación de refrigeradores express",
-  "description": "Reparación y mantenimiento de refrigeradores domésticos, comerciales y cámaras de refrigeración a domicilio en la zona metropolitana de Guadalajara.",
+  "description": "Reparación y mantenimiento de refrigeradores domésticos, comerciales, cámaras de refrigeración y lavadoras a domicilio en Guadalajara, Zapopan y Tonalá.",
   "telephone": "+523315273735",
   "priceRange": "$$",
   "address": { "@type": "PostalAddress", "addressLocality": "Guadalajara", "addressRegion": "Jalisco", "addressCountry": "MX" },
   "areaServed": [
     { "@type": "City", "name": "Guadalajara" },
     { "@type": "City", "name": "Zapopan" },
-    { "@type": "City", "name": "San Pedro Tlaquepaque" },
     { "@type": "City", "name": "Tonalá" }
   ],
   "openingHoursSpecification": [{
@@ -66,6 +65,8 @@
     { "@type": "Question", "name": "¿Cuánto cuesta la revisión?", "acceptedAnswer": { "@type": "Answer", "text": "La revisión a domicilio cuesta $200. Con ella el técnico diagnostica la falla y te da el precio de la reparación antes de empezar." } },
     { "@type": "Question", "name": "¿Dan garantía?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Las reparaciones llevan garantía por escrito de 90 días." } },
     { "@type": "Question", "name": "¿Qué horario tienen?", "acceptedAnswer": { "@type": "Answer", "text": "De lunes a sábado, de 8:00 a 19:00 horas." } },
+    { "@type": "Question", "name": "¿Cuánto tardan en llegar?", "acceptedAnswer": { "@type": "Answer", "text": "De 1 a 4 horas desde que nos escribes, según tu zona y la carga del día. Te confirmamos la hora por WhatsApp antes de salir." } },
+    { "@type": "Question", "name": "¿También reparan lavadoras?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Reparamos lavadoras de carga superior y frontal en Guadalajara, Zapopan y Tonalá, con la misma revisión de $200." } },
     { "@type": "Question", "name": "¿Facturan y aceptan tarjeta?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, facturamos y aceptamos pago con tarjeta." } },
     { "@type": "Question", "name": "¿Reparan refrigeradores de negocio y cámaras de refrigeración?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Atendemos refrigeradores de casa, equipos comerciales como vitrinas y enfriadores, y cámaras de refrigeración." } }
   ]
@@ -235,7 +236,7 @@ section{scroll-margin-top:76px}
 
 /* Servicios */
 .servicios{display:grid;gap:1rem}
-@media (min-width:700px){.servicios{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:700px){.servicios{grid-template-columns:repeat(2,1fr)}.serv.ancho{grid-column:1/-1}}
 .serv{position:relative;background:var(--crema);border-radius:var(--radio);padding:1.8rem;display:grid;gap:.8rem;align-content:start;overflow:hidden;
   transition:transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out)}
 .serv .ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--terracota);color:var(--blanco)}
@@ -264,8 +265,7 @@ section{scroll-margin-top:76px}
 
 /* Zonas */
 .zonas{display:grid;gap:1rem}
-@media (min-width:700px){.zonas{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1040px){.zonas{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:900px){.zonas{grid-template-columns:repeat(3,1fr)}}
 .zona{background:var(--crema);border-radius:var(--radio);padding:1.6rem;display:grid;gap:.6rem;align-content:start}
 .zona h3{font-size:1.5rem}
 .zona p{color:var(--tinta-suave);font-size:.97rem}
@@ -431,7 +431,7 @@ body.fijo{overflow:hidden}
       <div class="cap claro" id="cap0">
         <div class="wrap cap-grid">
           <div class="txt">
-            <p class="eyebrow">Guadalajara · Zapopan · Tlaquepaque · Tonalá</p>
+            <p class="eyebrow">Guadalajara · Zapopan · Tonalá · Llegamos en 1 a 4 h</p>
             <h1 id="titulo">Reparación de <em>refrigeradores</em> en Guadalajara</h1>
             <p class="lead">Vamos a tu casa o negocio, revisamos tu refrigerador y te decimos qué tiene y cuánto cuesta antes de tocar nada.</p>
             <div class="hero-ctas">
@@ -504,7 +504,7 @@ body.fijo{overflow:hidden}
       <div class="sec-head rev">
         <p class="eyebrow">Servicios</p>
         <h2 id="h-serv">Frío que vuelve a funcionar</h2>
-        <p>Atendemos el refrigerador de tu cocina y el equipo del que depende tu negocio. Mismo cuidado, misma garantía.</p>
+        <p>Atendemos el refrigerador de tu cocina, el equipo del que depende tu negocio y tu lavadora. Mismo cuidado, misma garantía.</p>
       </div>
       <div class="servicios">
         <article class="serv rev">
@@ -534,6 +534,13 @@ body.fijo{overflow:hidden}
           <p>Limpieza y revisión preventiva para que tu equipo dure más y gaste menos luz. Ideal para negocios que no pueden parar.</p>
           <ul><li>Limpieza de condensador</li><li>Revisión de gas y presiones</li><li>Ajuste y prueba de funcionamiento</li></ul>
         <a class="mas" href="/mantenimiento-refrigeracion-guadalajara/">Ver mantenimiento <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="serv ancho rev">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M8 5.5h2"/></svg></span>
+          <h3>Lavadoras</h3>
+          <p>Lavadoras de carga superior y frontal que no centrifugan, no drenan, no llenan o hacen ruido. Mismo técnico, misma revisión de $200.</p>
+          <ul><li>Centrifugado y desagüe</li><li>Bomba, banda y transmisión</li><li>Seguro de tapa y tarjeta</li></ul>
+        <a class="mas" href="/reparacion-lavadoras-guadalajara/">Ver reparación de lavadoras <span aria-hidden="true">→</span></a>
         </article>
       </div>
     </div>
@@ -572,32 +579,26 @@ body.fijo{overflow:hidden}
     <div class="wrap">
       <div class="sec-head rev">
         <p class="eyebrow">Zonas</p>
-        <h2 id="h-zonas">Toda la zona metropolitana</h2>
-        <p>Vamos a domicilio en los cuatro municipios del centro de la metrópoli. Escríbenos tu colonia y te confirmamos el horario de la visita.</p>
+        <h2 id="h-zonas">Guadalajara, Zapopan y Tonalá</h2>
+        <p>Vamos a domicilio en Guadalajara, Zapopan y Tonalá, y llegamos en 1 a 4 horas desde que nos escribes. Mándanos tu colonia y te confirmamos la hora antes de salir.</p>
       </div>
       <div class="zonas">
         <article class="zona rev">
           <span class="tag">Guadalajara</span>
           <h3>Reparación de refrigeradores en Guadalajara</h3>
-          <p>Del Centro a las colonias residenciales del poniente. Aquí conviven casas de muchos años con departamentos nuevos, y atendemos desde el refrigerador de toda la vida hasta equipos modernos con control electrónico.</p>
+          <p>Centro, Independencia, Americana, Providencia, Chapalita, Country Club, Jardines del Bosque y Oblatos, entre muchas otras. Atendemos desde el refrigerador de toda la vida hasta equipos modernos con control electrónico.</p>
         <a class="mas" href="/cobertura/">Ver Guadalajara <span aria-hidden="true">→</span></a>
         </article>
         <article class="zona rev">
           <span class="tag">Zapopan</span>
           <h3>Reparación de refrigeradores en Zapopan</h3>
-          <p>Fraccionamientos, cotos y zonas de oficinas. En Zapopan son comunes los refrigeradores dúplex y de dos puertas en casa, y las vitrinas en plazas y restaurantes: revisamos ambos.</p>
+          <p>Ciudad Granja, Jardines Universidad, Las Águilas, Puerta de Hierro, Valle Real, Tabachines y más. Son comunes los refrigeradores dúplex y con despachador en casa, y las vitrinas en plazas: revisamos ambos.</p>
         <a class="mas" href="/reparacion-refrigeradores-zapopan/">Ver Zapopan <span aria-hidden="true">→</span></a>
-        </article>
-        <article class="zona rev">
-          <span class="tag">Tlaquepaque</span>
-          <h3>Reparación de refrigeradores en Tlaquepaque</h3>
-          <p>Entre talleres, restaurantes del centro y casas familiares. Para los negocios de comida damos prioridad a cámaras y enfriadores, porque un equipo parado se traduce en producto perdido.</p>
-        <a class="mas" href="/reparacion-refrigeradores-tlaquepaque/">Ver Tlaquepaque <span aria-hidden="true">→</span></a>
         </article>
         <article class="zona rev">
           <span class="tag">Tonalá</span>
           <h3>Reparación de refrigeradores en Tonalá</h3>
-          <p>Hogares, tiendas de abarrotes y negocios de la zona del tianguis. Damos mantenimiento a enfriadores de bebidas y refrigeradores de tienda para que aguanten el calor de temporada.</p>
+          <p>Centro de Tonalá, Loma Dorada, Santa Paula, Rey Xólotl y más. Hogares, abarrotes y negocios del tianguis: damos mantenimiento a enfriadores para que aguanten el calor de temporada.</p>
         <a class="mas" href="/reparacion-refrigeradores-tonala/">Ver Tonalá <span aria-hidden="true">→</span></a>
         </article>
       </div>
@@ -621,6 +622,8 @@ body.fijo{overflow:hidden}
         <details class="rev"><summary>¿Cuánto cuesta la revisión?<span class="mas" aria-hidden="true">+</span></summary><p class="r">La revisión a domicilio cuesta $200. Con ella el técnico diagnostica la falla y te da el precio de la reparación antes de empezar.</p></details>
         <details class="rev"><summary>¿Dan garantía?<span class="mas" aria-hidden="true">+</span></summary><p class="r">Sí. Las reparaciones llevan garantía por escrito de 90 días.</p></details>
         <details class="rev"><summary>¿Qué horario tienen?<span class="mas" aria-hidden="true">+</span></summary><p class="r">De lunes a sábado, de 8:00 a 19:00 horas.</p></details>
+        <details class="rev"><summary>¿Cuánto tardan en llegar?<span class="mas" aria-hidden="true">+</span></summary><p class="r">De 1 a 4 horas desde que nos escribes, según tu zona y la carga del día. Te confirmamos la hora por WhatsApp antes de salir.</p></details>
+        <details class="rev"><summary>¿También reparan lavadoras?<span class="mas" aria-hidden="true">+</span></summary><p class="r">Sí. Reparamos lavadoras de carga superior y frontal en Guadalajara, Zapopan y Tonalá, con la misma revisión de $200.</p></details>
         <details class="rev"><summary>¿Facturan y aceptan tarjeta?<span class="mas" aria-hidden="true">+</span></summary><p class="r">Sí, facturamos y aceptamos pago con tarjeta.</p></details>
         <details class="rev"><summary>¿Reparan refrigeradores de negocio y cámaras de refrigeración?<span class="mas" aria-hidden="true">+</span></summary><p class="r">Sí. Atendemos refrigeradores de casa, equipos comerciales como vitrinas y enfriadores, y cámaras de refrigeración.</p></details>
       </div>
@@ -646,7 +649,7 @@ body.fijo{overflow:hidden}
   <div class="wrap">
     <div>
       <a class="logo" href="#inicio"><span>Refrigeradores <em>Express</em></span></a>
-      <p style="margin-top:.8rem;max-width:36ch">Reparación y mantenimiento de refrigeradores domésticos, comerciales y cámaras de refrigeración en la zona metropolitana de Guadalajara, Jalisco.</p>
+      <p style="margin-top:.8rem;max-width:36ch">Reparación de refrigeradores domésticos, comerciales, cámaras de refrigeración y lavadoras a domicilio en Guadalajara, Zapopan y Tonalá, Jalisco.</p>
     </div>
     <div>
       <h3>Contacto</h3>
@@ -663,6 +666,7 @@ body.fijo{overflow:hidden}
         <li><a href="/reparacion-refrigeradores-comerciales-guadalajara/">Comerciales</a></li>
         <li><a href="/reparacion-camaras-de-refrigeracion-guadalajara/">Cámaras de refrigeración</a></li>
         <li><a href="/mantenimiento-refrigeracion-guadalajara/">Mantenimiento</a></li>
+        <li><a href="/reparacion-lavadoras-guadalajara/">Lavadoras</a></li>
         <li><a href="/refrigerador-no-enfria-guadalajara/">Refrigerador no enfría</a></li>
       </ul>
     </div>
@@ -671,7 +675,6 @@ body.fijo{overflow:hidden}
       <ul>
         <li><a href="/cobertura/">Guadalajara</a></li>
         <li><a href="/reparacion-refrigeradores-zapopan/">Zapopan</a></li>
-        <li><a href="/reparacion-refrigeradores-tlaquepaque/">Tlaquepaque</a></li>
         <li><a href="/reparacion-refrigeradores-tonala/">Tonalá</a></li>
         <li><a href="/blog/">Blog</a></li>
       </ul>
@@ -693,6 +696,7 @@ body.fijo{overflow:hidden}
         <label class="chip"><input type="radio" name="equipo" value="refrigerador comercial"><span>De negocio</span></label>
         <label class="chip"><input type="radio" name="equipo" value="cámara de refrigeración"><span>Cámara</span></label>
         <label class="chip"><input type="radio" name="equipo" value="mantenimiento"><span>Mantenimiento</span></label>
+        <label class="chip"><input type="radio" name="equipo" value="lavadora"><span>Lavadora</span></label>
       </div>
     </fieldset>
     <fieldset id="f-zona">
@@ -700,7 +704,6 @@ body.fijo{overflow:hidden}
       <div class="chips">
         <label class="chip"><input type="radio" name="zona" value="Guadalajara"><span>Guadalajara</span></label>
         <label class="chip"><input type="radio" name="zona" value="Zapopan"><span>Zapopan</span></label>
-        <label class="chip"><input type="radio" name="zona" value="Tlaquepaque"><span>Tlaquepaque</span></label>
         <label class="chip"><input type="radio" name="zona" value="Tonalá"><span>Tonalá</span></label>
       </div>
     </fieldset>
@@ -712,7 +715,7 @@ body.fijo{overflow:hidden}
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
       Enviar por WhatsApp
     </button>
-    <p class="nota">Revisión a domicilio $200 · Lun a Sáb 8 a 19 h</p>
+    <p class="nota">Revisión a domicilio $200 · Llegamos en 1 a 4 h · Lun a Sáb 8 a 19 h</p>
   </form>
 </div>
 
