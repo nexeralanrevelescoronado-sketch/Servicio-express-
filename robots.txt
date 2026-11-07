@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /_fuente/
 
-Sitemap: https://refrigeradores-express-gdl.onrender.com/sitemap.xml
+Sitemap: https://reparacionderefrigeradores.onrender.com/sitemap.xml

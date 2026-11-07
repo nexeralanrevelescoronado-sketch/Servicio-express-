@@ -12,7 +12,7 @@ import { PAGES } from './data.mjs';
 import { renderPage, render404, href } from './template.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const SITE_URL = (process.env.SITE_URL || 'https://refrigeradores-express-gdl.onrender.com').replace(/\/+$/, '');
+const SITE_URL = (process.env.SITE_URL || 'https://reparacionderefrigeradores.onrender.com').replace(/\/+$/, '');
 const GTM_ID = process.env.GTM_ID || '';
 const TODAY = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
 
