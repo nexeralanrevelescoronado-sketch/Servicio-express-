@@ -187,8 +187,8 @@ p{margin:0}
 @media (min-width:900px){.con3d .cap .txt{max-width:31rem}}
 .con3d .cap-grid{display:block}
 .con3d .poster-wrap{position:absolute;inset:64px 0 0;pointer-events:none;transition:opacity 400ms ease}
-.con3d .poster{position:absolute;height:76%;width:auto;left:68%;top:47%;transform:translate(-50%,-50%)}
-.listo3d .poster-wrap{opacity:0}
+.con3d .poster{position:absolute;height:86%;width:auto;left:68%;top:48%;transform:translate(-50%,-50%)}
+.listo3d .poster-wrap{opacity:0;transition:opacity 200ms ease}
 .con3d .etqs{display:block;position:absolute;inset:0;pointer-events:none;z-index:1}
 .etq{position:absolute;left:0;top:0;padding:.35rem .75rem .35rem 1.45rem;border-radius:999px;background:rgba(255,250,242,.94);color:var(--tinta);font-size:.8rem;font-weight:600;white-space:nowrap;opacity:0;box-shadow:0 10px 24px -12px rgba(0,0,0,.6)}
 .etq::before{content:"";position:absolute;left:.6rem;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--terracota)}
@@ -209,7 +209,7 @@ p{margin:0}
   .con3d .cap .partes{gap:.2rem;font-size:.92rem}
   .con3d .cap .hero-ctas{margin-top:.2rem}
   .con3d .cap .hero-ctas .btn{min-height:48px}
-  .con3d .poster{left:50%;top:24%;height:44%}
+  .con3d .poster{left:50%;top:27%;height:54%}
   .con3d .puntos{right:2px;top:28%}
   .etq{font-size:.72rem}
 }
@@ -369,16 +369,11 @@ body.fijo{overflow:hidden}
 }
 </style>
 <script>
-/* Decide antes de pintar si hay 3D (evita saltos de diseño). Sin 3D: equipo débil, sin WebGL o "reducir movimiento". */
+/* Recorrido por cuadros: se activa salvo con "reducir movimiento" o "ahorro de datos" (ahí se ve la versión fija). */
 (function () {
   try {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var m = navigator.deviceMemory, c = navigator.hardwareConcurrency;
-    if ((m && m < 4) || (c && c < 4)) return;
-    var k = document.createElement('canvas');
-    var gl = k.getContext('webgl2') || k.getContext('webgl');
-    if (!gl) return;
-    var x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext();
+    if (navigator.connection && navigator.connection.saveData) return;
     document.documentElement.classList.add('con3d');
   } catch (e) {}
 })();
@@ -444,7 +439,7 @@ body.fijo{overflow:hidden}
             <p class="pista">Desliza y mira cómo trabajamos <span aria-hidden="true">↓</span></p>
           </div>
           <figure class="poster-wrap">
-            <img class="poster" id="poster" src="/refri.webp" width="900" height="1200" fetchpriority="high" alt="Refrigerador de acero inoxidable de dos puertas">
+            <img class="poster" id="poster" src="/refri.webp" width="720" height="960" fetchpriority="high" alt="Refrigerador de acero inoxidable de dos puertas">
           </figure>
         </div>
       </div>
@@ -840,37 +835,28 @@ body.fijo{overflow:hidden}
   });
 })();
 </script>
-<script type="importmap">
-{ "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
-} }
-</script>
 <script type="module">
+/* Recorrido fotorrealista: cuadros renderizados (fondo transparente) que avanzan con el scroll
+   sobre los colores de la página. Textos en HTML; etiquetas con posiciones calculadas en el render. */
 const root = document.documentElement;
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-const tl = (k, p) => {
-  if (p <= k[0][0]) return k[0][1];
-  for (let i = 1; i < k.length; i++) if (p <= k[i][0]) {
-    const [a, va] = k[i - 1], [b, vb] = k[i];
-    return va + (vb - va) * ease((p - a) / (b - a));
-  }
-  return k[k.length - 1][1];
-};
 
 if (root.classList.contains('con3d')) {
   const escena = document.getElementById('escena');
   const escenario = document.getElementById('escenario');
+  const lienzo = document.getElementById('lienzo');
+  const poster = document.getElementById('poster');
   const caps = [...document.querySelectorAll('.escena .cap')];
-  const rangos = [[0, .15], [.2, .42], [.5, .76], [.86, 1.01]];
-  const metas = [0, .31, .63, .95];
+  // Momentos del render: cerrado 0–.24 · abre .24–.48 · se voltea y desarma .48–.76 · se arma y cierra .76–1
+  const rangos = [[0, .18], [.26, .5], [.6, .8], [.88, 1.01]];
+  const metas = [0, .38, .70, .97];
   const puntos = document.getElementById('puntos');
   const dots = [...puntos.querySelectorAll('button')];
-  const fondos = [[0, [255, 240, 219]], [.16, [255, 240, 219]], [.30, [16, 36, 74]], [.48, [16, 36, 74]], [.58, [28, 19, 16]], [.80, [28, 19, 16]], [.92, [255, 240, 219]]];
+  const fondos = [[0, [255, 240, 219]], [.2, [255, 240, 219]], [.3, [16, 36, 74]], [.5, [16, 36, 74]], [.58, [28, 19, 16]], [.8, [28, 19, 16]], [.9, [255, 240, 219]]];
   const prog = () => { const r = escena.getBoundingClientRect(); return clamp(-r.top / (r.height - innerHeight)); };
 
-  // Textos HTML, puntos y color de fondo: funcionan aunque el 3D no cargue
+  // ---- Textos, puntos y color de fondo (funcionan aunque los cuadros no carguen) ----
   let ultimo = -1, fondoAnt = '';
   function textos() {
     const p = prog(); if (Math.abs(p - ultimo) < .0004) return; ultimo = p;
@@ -900,255 +886,92 @@ if (root.classList.contains('con3d')) {
     scrollTo({ top: escena.offsetTop + metas[i] * (escena.offsetHeight - innerHeight), behavior: 'smooth' });
   }));
 
-  // El 3D se carga después del primer pintado (no compite con el LCP)
-  let pedido = false;
-  const cargar = () => {
-    if (pedido) return; pedido = true;
-    Promise.all([
-      import('three'),
-      import('three/addons/environments/RoomEnvironment.js'),
-      import('three/addons/geometries/RoundedBoxGeometry.js')
-    ]).then(([THREE, { RoomEnvironment }, { RoundedBoxGeometry }]) => iniciar(THREE, RoomEnvironment, RoundedBoxGeometry, prog, escena, escenario))
-      .catch(() => {}); // si falla, se queda la imagen fija y todo sigue funcionando
-  };
-  addEventListener('scroll', cargar, { once: true, passive: true });
-  if ('requestIdleCallback' in window) requestIdleCallback(cargar, { timeout: 1200 }); else setTimeout(cargar, 500);
-}
+  // ---- Secuencia de cuadros ----
+  const ligero = innerWidth < 900 || (navigator.deviceMemory && navigator.deviceMemory < 4);
+  const SET = ligero ? { dir: '/seq/m/', n: 61, paso: 2 } : { dir: '/seq/d/', n: 121, paso: 1 };
+  const imgs = new Array(SET.n);
+  const ctx = lienzo.getContext('2d');
+  let datos = null, actual = 0, dibujado = -1, w = 0, h = 0, dpr = 1, caja = null, listo = false, visible = true;
+  const etqs = [...document.querySelectorAll('.etq')].map(el => ({ el, k: el.dataset.p, ancho: 0 }));
 
-function iniciar(THREE, RoomEnvironment, RoundedBoxGeometry, prog, escena, escenario) {
-  const canvas = document.getElementById('lienzo');
-  const modoPoster = location.hash === '#poster';
-  let renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance', preserveDrawingBuffer: modoPoster }); }
-  catch (e) { return; }
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.0;
-  const scene = new THREE.Scene();
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), .04).texture;
-  pmrem.dispose();
-  scene.environmentIntensity = .95;
-  const camera = new THREE.PerspectiveCamera(32, 1, .1, 60);
-
-  // ---- Materiales ----
-  const acero = new THREE.MeshPhysicalMaterial({ color: 0xd5d9dc, metalness: .9, roughness: .28, clearcoat: .7, clearcoatRoughness: .2 });
-  const interior = new THREE.MeshStandardMaterial({ color: 0xf3f6f9, roughness: .55, emissive: 0xd6ecff, emissiveIntensity: 0 });
-  const vidrio = new THREE.MeshStandardMaterial({ color: 0xd9f0ff, transparent: true, opacity: .32, roughness: .08, depthWrite: false });
-  const oscuro = new THREE.MeshStandardMaterial({ color: 0x1d2127, roughness: .45, metalness: .5 });
-  const jaladera = new THREE.MeshStandardMaterial({ color: 0x2a2f36, roughness: .25, metalness: .9 });
-  const cobre = new THREE.MeshStandardMaterial({ color: 0xc06a3a, roughness: .3, metalness: .85 });
-  const plastico = c => new THREE.MeshStandardMaterial({ color: c, roughness: .45 });
-
-  // ---- Refrigerador (medidas en metros) ----
-  const W = .9, H = 1.8, D = .72, t = .03, Hf = .52, G = .012;
-  const refri = new THREE.Group(); scene.add(refri);
-  const caja = (w, h, d, m, x, y, z, g = refri) => { const me = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); me.position.set(x, y, z); g.add(me); return me; };
-
-  caja(t, H, D, acero, -W / 2 + t / 2, 0, 0); caja(t, H, D, acero, W / 2 - t / 2, 0, 0);
-  caja(W, t, D, acero, 0, H / 2 - t / 2, 0); caja(W, .07, D, oscuro, 0, -H / 2 + .035, 0);
-  const trasera = caja(W, H, t, acero, 0, 0, -D / 2 + t / 2);
-  const li = .008, ix = W / 2 - t - li / 2;
-  caja(li, H - .1, D - t - .02, interior, -ix, 0, t / 2); caja(li, H - .1, D - t - .02, interior, ix, 0, t / 2);
-  caja(W - 2 * t, H - .1, li, interior, 0, 0, -D / 2 + t + li / 2);
-  caja(W - 2 * t, li, D - t - .02, interior, 0, H / 2 - t - li / 2, t / 2);
-  caja(W - 2 * t, li, D - t - .02, interior, 0, -H / 2 + .07 + li / 2, t / 2);
-  const yDiv = H / 2 - Hf;
-  caja(W - 2 * t, .04, D - t - .02, interior, 0, yDiv, t / 2);
-  const sh = [yDiv - .33, yDiv - .66, -H / 2 + .33];
-  sh.forEach(y => caja(W - 2 * t - .02, .012, D - .2, vidrio, 0, y, -.02));
-  caja(W - 2 * t - .02, .012, D - .2, vidrio, 0, H / 2 - .27, -.02);
-  caja(W - 2 * t - .04, .18, D - .24, vidrio, 0, -H / 2 + .17, -.02);
-
-  // Comida (le da vida al abrir)
-  const cil = (r, h, c, x, y, z) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 20), plastico(c)); m.position.set(x, y + h / 2 + .006, z); refri.add(m); };
-  const bol = (r, c, x, y, z) => { const m = new THREE.Mesh(new THREE.SphereGeometry(r, 16, 12), plastico(c)); m.position.set(x, y + r + .006, z); refri.add(m); };
-  const cj = (w, h, d, c, x, y, z) => caja(w, h, d, plastico(c), x, y + h / 2 + .006, z);
-  cj(.09, .2, .09, 0xffffff, -.27, sh[0], -.08); cil(.035, .24, 0x2e7d4f, -.13, sh[0], -.12); cil(.06, .16, 0xf0a030, .07, sh[0], -.06);
-  bol(.04, 0xc0392b, .27, sh[0], .02); bol(.04, 0xd64a2f, .19, sh[0], .06);
-  cj(.16, .07, .12, 0xb4582e, -.18, sh[1], -.05); cj(.16, .08, .12, 0x24509e, .08, sh[1], -.05); cj(.1, .05, .1, 0xf5e6c8, .28, sh[1], 0);
-  cil(.03, .22, 0x7a4a1c, .14, sh[2], -.1); cil(.03, .22, 0x2e7d4f, .22, sh[2], -.1); cil(.03, .22, 0x9b1c2e, .30, sh[2], -.1);
-  bol(.05, 0x4f8a3a, -.26, sh[2], -.02); bol(.045, 0x6aa84f, -.15, sh[2], .03);
-  cj(.24, .06, .18, 0xe8f4ff, -.15, H / 2 - .27, -.05); cj(.2, .1, .16, 0xcfe6f7, .15, H / 2 - .27, -.05);
-  cj(.3, .08, .2, 0xdfeefa, 0, yDiv + .02, -.05);
-
-  // Puertas con bisagra a la derecha
-  function puerta(y0, y1) {
-    const h = y1 - y0, piv = new THREE.Group();
-    piv.position.set(W / 2, (y0 + y1) / 2, D / 2); refri.add(piv);
-    const hoja = new THREE.Mesh(new RoundedBoxGeometry(W, h, .06, 4, .016), acero); hoja.position.set(-W / 2, 0, .03); piv.add(hoja);
-    caja(W - .08, h - .08, .006, interior, -W / 2, 0, -.003, piv);
-    const n = Math.max(1, Math.floor((h - .1) / .3));
-    for (let i = 0; i < n; i++) caja(W - .16, .05, .07, vidrio, -W / 2, -h / 2 + .16 + i * .3, -.04, piv);
-    const lj = Math.min(.55, h * .6);
-    const jl = new THREE.Mesh(new RoundedBoxGeometry(.028, lj, .035, 3, .012), jaladera);
-    jl.position.set(-W + .07, h > .6 ? h / 2 - lj / 2 - .06 : -h / 2 + lj / 2 + .06, .085); piv.add(jl);
-    return piv;
-  }
-  const pArr = puerta(yDiv + G / 2, H / 2);
-  const pAbj = puerta(-H / 2 + .07, yDiv - G / 2);
-
-  // Piezas que se separan en la vista de diagnóstico
-  const piezas = {}, lista = [];
-  const pieza = (obj, base, fuera, nombre) => { obj.position.copy(base); refri.add(obj); const o = { obj, base, fuera }; lista.push(o); if (nombre) piezas[nombre] = o; };
-  const V = (x, y, z) => new THREE.Vector3(x, y, z);
-
-  const comp = new THREE.Group();
-  comp.add(new THREE.Mesh(new THREE.CapsuleGeometry(.085, .09, 6, 20), oscuro));
-  const tubo = new THREE.Mesh(new THREE.TorusGeometry(.05, .008, 8, 24, Math.PI), cobre); tubo.position.y = .12; comp.add(tubo);
-  pieza(comp, V(.22, -H / 2 + .16, -D / 2 - .11), V(.4, -H / 2 + .28, -D / 2 - .8), 'compresor');
-
-  const pts = [], filas = 11;
-  for (let i = 0; i <= filas; i++) { const y = -.62 + i * (1.24 / filas), s = i % 2 ? 1 : -1; pts.push(V(-.3 * s, y, 0), V(.3 * s, y, 0)); }
-  const cond = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, false, 'centripetal'), 320, .011, 6), cobre);
-  pieza(cond, V(0, .12, -D / 2 - .035), V(0, .2, -D / 2 - .45), 'condensador');
-
-  const vent = new THREE.Group();
-  vent.add(new THREE.Mesh(new THREE.TorusGeometry(.09, .011, 8, 32), oscuro));
-  const aspas = new THREE.Group();
-  for (let i = 0; i < 5; i++) {
-    const g = new THREE.Group(); g.rotation.z = i * Math.PI * 2 / 5;
-    const a = new THREE.Mesh(new THREE.BoxGeometry(.075, .026, .004), plastico(0x9aa4ad)); a.position.x = .042; a.rotation.x = .4; g.add(a); aspas.add(g);
-  }
-  aspas.add(new THREE.Mesh(new THREE.CylinderGeometry(.018, .018, .02, 16).rotateX(Math.PI / 2), oscuro));
-  vent.add(aspas);
-  pieza(vent, V(-.2, -H / 2 + .18, -D / 2 - .07), V(-.45, -H / 2 + .36, -D / 2 - .65), 'ventilador');
-
-  const term = new THREE.Group();
-  term.add(new THREE.Mesh(new RoundedBoxGeometry(.12, .06, .04, 3, .01), plastico(0xf7f7f7)));
-  const dial = new THREE.Mesh(new THREE.CylinderGeometry(.018, .018, .02, 20).rotateX(Math.PI / 2), cobre); dial.position.set(.03, 0, .025); term.add(dial);
-  pieza(term, V(-.26, yDiv - .07, D / 2 - .14), V(.85, yDiv + .1, -.1), 'termostato');
-
-  const goma = plastico(0x3a3f45), empaque = new THREE.Group();
-  const hb = (yDiv - G / 2) - (-H / 2 + .07), cyb = ((yDiv - G / 2) + (-H / 2 + .07)) / 2;
-  caja(W - .05, .018, .018, goma, 0, hb / 2 - .02, 0, empaque); caja(W - .05, .018, .018, goma, 0, -hb / 2 + .02, 0, empaque);
-  caja(.018, hb - .04, .018, goma, -W / 2 + .025, 0, 0, empaque); caja(.018, hb - .04, .018, goma, W / 2 - .025, 0, 0, empaque);
-  pieza(empaque, V(0, cyb, D / 2 + .006), V(.55, cyb, D / 2 + .3), null);
-
-  // Sombra de contacto falsa (barata y bonita)
-  const tex = (paint) => { const c = document.createElement('canvas'); c.width = c.height = 128; paint(c.getContext('2d')); return new THREE.CanvasTexture(c); };
-  const sombra = new THREE.Mesh(new THREE.PlaneGeometry(1.9, 1.5), new THREE.MeshBasicMaterial({
-    transparent: true, depthWrite: false,
-    map: tex(x => { const g = x.createRadialGradient(64, 64, 0, 64, 64, 64); g.addColorStop(0, 'rgba(0,0,0,.55)'); g.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = g; x.fillRect(0, 0, 128, 128); })
-  }));
-  sombra.rotation.x = -Math.PI / 2; sombra.position.y = -H / 2 - .002; refri.add(sombra);
-
-  // Luces
-  const sol = new THREE.DirectionalLight(0xfff0e0, 1.6); sol.position.set(3, 5, 4); scene.add(sol);
-  const rel = new THREE.DirectionalLight(0xbfd8ff, .6); rel.position.set(-4, 2, -3); scene.add(rel);
-  const frio = new THREE.PointLight(0xcfe8ff, 0, 2.4, 1.4); frio.position.set(0, .05, .15); refri.add(frio);
-
-  // Vaho frío que sale al abrir
-  const movil = innerWidth < 900;
-  const N = movil ? 240 : 520, pos = new Float32Array(N * 3), vel = new Float32Array(N);
-  const nace = (i, r) => {
-    pos[i * 3] = (Math.random() - .5) * (W - .12);
-    pos[i * 3 + 1] = -H / 2 + .12 + Math.random() * (H - .25);
-    pos[i * 3 + 2] = D / 2 - .04 + (r ? Math.random() * .6 : 0);
-    vel[i] = .06 + Math.random() * .12;
-  };
-  for (let i = 0; i < N; i++) nace(i, true);
-  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const vaho = new THREE.Points(geo, new THREE.PointsMaterial({
-    size: .09, transparent: true, opacity: 0, depthWrite: false, color: 0xe6f4ff,
-    map: tex(x => { const g = x.createRadialGradient(64, 64, 0, 64, 64, 64); g.addColorStop(0, 'rgba(255,255,255,.9)'); g.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = g; x.fillRect(0, 0, 128, 128); })
-  }));
-  refri.add(vaho);
-
-  // ---- Línea de tiempo ligada al scroll ----
-  const K = {
-    rot: [[0, -.55], [.16, -.32], [.40, -.08], [.48, -.08], [.64, -2.25], [.78, -2.25], [.96, -2 * Math.PI - .5]],
-    pa: [[0, 0], [.15, 0], [.38, 1.25], [.48, 1.25], [.62, .45], [.80, .45], [.94, 0]],
-    pb: [[0, 0], [.17, 0], [.41, 1.55], [.48, 1.55], [.62, .5], [.80, .5], [.95, 0]],
-    ex: [[0, 0], [.5, 0], [.64, 1], [.77, 1], [.9, 0]],
-    zoom: [[0, 1], [.3, .93], [.48, .93], [.64, 1], [.9, 1]],
-    luz: [[0, 0], [.18, 0], [.36, 1], [.5, 1], [.62, .25], [.8, .25], [.94, 0]]
-  };
-  const S = {}; for (const n in K) S[n] = tl(K[n], prog());
-
-  let w = 1, h = 1, dist = 4, esMovil = false;
   function medir() {
-    if (modoPoster) {
-      w = 900; h = 1200; renderer.setPixelRatio(1); renderer.setSize(w, h, false);
-      camera.aspect = w / h; camera.clearViewOffset();
-      dist = (H / .74 / 2) / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-      camera.updateProjectionMatrix(); return;
-    }
-    w = escenario.clientWidth; h = escenario.clientHeight;
-    const mv = w < 900; esMovil = mv;
-    renderer.setPixelRatio(Math.min(devicePixelRatio, mv ? 1.5 : 2));
-    renderer.setSize(w, h, false);
-    const tanF = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-    if (mv) { // refri arriba, texto abajo
-      const s = .21, fullH = h * (1 + 2 * s);
-      camera.aspect = w / fullH; camera.setViewOffset(w, fullH, 0, 2 * s * h, w, h);
-      dist = (H / (.36 * h / fullH) / 2) / tanF;
-      dist = Math.max(dist, (W * 1.6 / camera.aspect / 2) / tanF);
-    } else { // texto a la izquierda, refri a la derecha
-      const s = .18, fullW = w * (1 + 2 * s);
-      camera.aspect = fullW / h; camera.setViewOffset(fullW, h, 0, 0, w, h);
-      dist = (H / .64 / 2) / tanF;
-    }
-    camera.updateProjectionMatrix();
+    w = escenario.clientWidth; h = escenario.clientHeight; dpr = Math.min(devicePixelRatio || 1, 2);
+    lienzo.width = Math.round(w * dpr); lienzo.height = Math.round(h * dpr);
+    const r = poster.getBoundingClientRect(), e = escenario.getBoundingClientRect();
+    caja = { x: r.left - e.left, y: r.top - e.top, w: r.width, h: r.height };
+    dibujado = -1;
   }
-  medir();
-  addEventListener('resize', medir);
-
-  const etqs = [...document.querySelectorAll('.etq')].map(el => ({ el, o: piezas[el.dataset.p] }));
-  const v3 = new THREE.Vector3();
-  let visible = true, tAnt = performance.now(), tiempo = 0, listo = false;
-  new IntersectionObserver(e => { visible = e[0].isIntersecting; tAnt = performance.now(); }).observe(escena);
-
-  function pintar(dt) {
-    const p = modoPoster ? 0 : prog();
-    const k = modoPoster ? 1 : 1 - Math.exp(-dt * 7);
-    for (const n in K) S[n] += (tl(K[n], p) - S[n]) * k;
-    tiempo += dt;
-    refri.rotation.y = S.rot;
-    refri.position.y = modoPoster ? 0 : Math.sin(tiempo * .9) * .012;
-    pArr.rotation.y = S.pa; pAbj.rotation.y = S.pb;
-    lista.forEach(o => o.obj.position.lerpVectors(o.base, o.fuera, S.ex));
-    trasera.position.set(0, S.ex * 3.6, -D / 2 + t / 2 - S.ex * .25);
-    trasera.visible = S.ex < .55;
-    aspas.rotation.z += dt * (3 + S.ex * 8);
-    frio.intensity = S.luz * 2.6;
-    interior.emissiveIntensity = S.luz * .35;
-    vaho.material.opacity = S.luz * .5 * (1 - S.ex);
-    if (S.luz > .02) {
-      for (let i = 0; i < N; i++) {
-        pos[i * 3 + 1] -= vel[i] * dt * .5; pos[i * 3 + 2] += vel[i] * dt * .8; pos[i * 3] += Math.sin(tiempo + i) * dt * .02;
-        if (pos[i * 3 + 2] > D / 2 + .7 || pos[i * 3 + 1] < -H / 2) nace(i, false);
-      }
-      geo.attributes.position.needsUpdate = true;
+  // Cuadro más cercano ya cargado (mientras llegan los demás)
+  function cercano(i) {
+    for (let d = 0; d < SET.n; d++) {
+      if (imgs[i - d]) return i - d;
+      if (imgs[i + d]) return i + d;
     }
-    camera.position.set(0, .32, dist * S.zoom * (1 + S.ex * (esMovil ? .3 : .28)));
-    camera.lookAt(0, -.02, 0);
-    renderer.render(scene, camera);
-    const vis = clamp((S.ex - .6) / .3);
+    return -1;
+  }
+  function pintar(i) {
+    const j = cercano(i); if (j < 0 || j === dibujado) return;
+    dibujado = j;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    ctx.drawImage(imgs[j], caja.x, caja.y, caja.w, caja.h);
+    if (!listo) { listo = true; root.classList.add('listo3d'); }
+    if (!datos) return;
+    const k = Math.min(120, j * SET.paso);
+    const vis = clamp((datos.separado[k] - .55) / .35);
     const usados = [];
     etqs.forEach(e => {
-      if (!e.ancho || vis === 0) e.ancho = e.el.offsetWidth;
-      e.o.obj.getWorldPosition(v3).project(camera);
-      const px = (v3.x * .5 + .5) * w, py = (-v3.y * .5 + .5) * h;
-      // si no cabe a la derecha, va a la izquierda de la pieza
+      const pos = datos.etiquetas[e.k][k];
+      if (!e.ancho) e.ancho = e.el.offsetWidth;
+      const px = caja.x + pos[0] * caja.w, py = caja.y + pos[1] * caja.h;
       let x = px + 16; if (x + e.ancho > w - 48) x = px - e.ancho - 16;
       let y = py - 14;
-      // evita que dos etiquetas se encimen
       usados.forEach(u => { if (Math.abs(u.x - x) < e.ancho && Math.abs(u.y - y) < 30) y = u.y + (y >= u.y ? 32 : -32); });
       usados.push({ x, y });
       e.el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
       e.el.style.opacity = vis;
     });
-    if (!listo) { listo = true; root.classList.add('listo3d'); }
   }
 
-  if (modoPoster) { pintar(0); window.__poster = canvas.toDataURL('image/png'); return; }
+  // Carga progresiva: primero 1 de cada 8, luego 1 de cada 4, 2 y todos (el scroll funciona desde el inicio)
+  function orden() {
+    const vistos = new Set(), o = [];
+    for (const salto of [8, 4, 2, 1]) for (let i = 0; i < SET.n; i += salto) if (!vistos.has(i)) { vistos.add(i); o.push(i); }
+    if (!vistos.has(SET.n - 1)) o.push(SET.n - 1);
+    return o;
+  }
+  let pedido = false;
+  function cargar() {
+    if (pedido) return; pedido = true;
+    medir();
+    fetch('/seq/etiquetas.json').then(r => r.json()).then(d => { datos = d; dibujado = -1; }).catch(() => {});
+    const cola = orden(); let enVuelo = 0;
+    const siguiente = () => {
+      while (enVuelo < 6 && cola.length) {
+        const i = cola.shift(); enVuelo++;
+        const im = new Image(); im.decoding = 'async';
+        im.src = SET.dir + String(i + 1).padStart(3, '0') + '.webp';
+        im.decode().then(() => { imgs[i] = im; dibujado = -1; }).catch(() => {}).finally(() => { enVuelo--; siguiente(); });
+      }
+    };
+    siguiente();
+  }
+  addEventListener('scroll', cargar, { once: true, passive: true });
+  if ('requestIdleCallback' in window) requestIdleCallback(cargar, { timeout: 1200 }); else setTimeout(cargar, 500);
+  addEventListener('resize', () => { if (pedido) medir(); });
+  new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(escena);
 
-  (function cuadro(now) {
-    requestAnimationFrame(cuadro);
-    if (!visible || document.hidden) return;
+  // Suaviza el avance (no salta de cuadro en cuadro con la rueda del mouse)
+  let tAnt = performance.now();
+  (function bucle(now) {
+    requestAnimationFrame(bucle);
+    if (!pedido || !visible || document.hidden) { tAnt = now; return; }
     const dt = Math.min(.05, (now - tAnt) / 1000); tAnt = now;
-    pintar(dt);
-  })(performance.now());
+    const meta = prog() * (SET.n - 1);
+    actual += (meta - actual) * (1 - Math.exp(-dt * 12));
+    if (Math.abs(meta - actual) < .02) actual = meta;
+    pintar(Math.round(actual));
+  })(tAnt);
 }
 </script>
 </body>
