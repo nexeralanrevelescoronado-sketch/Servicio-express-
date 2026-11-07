@@ -171,15 +171,19 @@ p{margin:0}
 .cap .partes b{color:var(--blanco);font-weight:600}
 .cap-grid{display:grid;gap:2rem;align-items:center}
 @media (min-width:900px){.cap-grid{grid-template-columns:1.1fr .9fr}}
-.poster-wrap{margin:0;display:grid;place-items:center}
+.poster-wrap,.fig-paso{margin:0;display:grid;place-items:center}
+.fig-paso img{width:min(100%,380px);height:auto}
+.con3d .fig-paso{display:none}
+@media (max-width:899px){.cap-grid .fig-paso,.cap-grid .poster-wrap{order:-1}.fig-paso img,.poster{width:min(78%,320px)}}
 .poster{width:min(100%,420px);height:auto}
 #lienzo,.etqs,.puntos,.pista{display:none}
 
 /* Modo 3D: escenario fijo mientras el scroll avanza la historia */
 .con3d .pista{display:block;font-size:.9rem;color:var(--tinta-suave)}
-.con3d .escena{height:560vh}
+.con3d .escena{height:420vh}
+@media (max-width:899px){.con3d .escena{height:330vh}}
 .con3d .escenario{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--crema)}
-.con3d #lienzo{display:block;position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 400ms ease}
+.con3d #lienzo{display:block;position:absolute;left:0;top:0;opacity:0;transition:opacity 400ms ease;pointer-events:none}
 .listo3d #lienzo{opacity:1}
 .con3d .cap{position:absolute;inset:0;padding:64px 0 0;display:flex;align-items:center;background:none;opacity:0;visibility:hidden}
 .con3d #cap0{opacity:1;visibility:visible}
@@ -200,9 +204,10 @@ p{margin:0}
 .puntos button:active::before{transform:scale(1.2)}
 @media (max-width:899px){
   .con3d .cap{align-items:flex-end;padding:64px 0 calc(14px + env(safe-area-inset-bottom))}
-  .con3d .cap .txt{padding:1.1rem 1.2rem;border-radius:20px;gap:.55rem;max-width:none;backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%)}
-  .con3d .cap.claro .txt{background:rgba(255,250,242,.8)}
-  .con3d .cap.oscuro .txt{background:rgba(16,36,74,.6)}
+  .con3d .cap .txt{padding:1.1rem 1.2rem;border-radius:20px;gap:.55rem;max-width:none;box-shadow:0 18px 40px -22px rgba(0,0,0,.45)}
+  .con3d .top{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(255,240,219,.97)}
+  .con3d .cap.claro .txt{background:rgba(255,250,242,.95)}
+  .con3d .cap.oscuro .txt{background:rgba(16,36,74,.92)}
   .con3d .cap h1{font-size:2.15rem}
   .con3d .cap h2{font-size:1.8rem}
   .con3d .cap .lead{font-size:.98rem}
@@ -445,16 +450,18 @@ body.fijo{overflow:hidden}
       </div>
 
       <div class="cap oscuro" id="cap1">
-        <div class="wrap"><div class="txt">
+        <div class="wrap cap-grid"><div class="txt">
           <p class="eyebrow">Paso 1 · Revisión</p>
           <h2>Abrimos y revisamos a fondo</h2>
           <p class="lead">Por $200 el técnico revisa tu refrigerador en tu domicilio: temperatura, enfriamiento, deshielo y sellos. Te explica qué tiene y te da el precio antes de reparar.</p>
           <ul class="facts"><li>Revisión a domicilio $200</li><li>Lun a Sáb · 8 a 19 h</li></ul>
-        </div></div>
+        </div>
+          <figure class="fig-paso"><img src="/seq/d/050.webp" width="720" height="960" loading="lazy" decoding="async" alt="Refrigerador abierto con luz fría y repisas con comida"></figure>
+        </div>
       </div>
 
       <div class="cap oscuro" id="cap2">
-        <div class="wrap"><div class="txt">
+        <div class="wrap cap-grid"><div class="txt">
           <p class="eyebrow">Paso 2 · Diagnóstico</p>
           <h2>Encontramos la falla de raíz</h2>
           <p class="lead">No cambiamos piezas a ciegas. Revisamos cada parte que hace el frío:</p>
@@ -465,18 +472,22 @@ body.fijo{overflow:hidden}
             <li><b>Termostato</b>: decide cuánto enfriar.</li>
             <li><b>Empaques</b>: que no se escape el frío.</li>
           </ul>
-        </div></div>
+        </div>
+          <figure class="fig-paso"><img src="/seq/d/086.webp" width="720" height="960" loading="lazy" decoding="async" alt="Refrigerador por detrás con compresor, condensador, ventilador y termostato separados"></figure>
+        </div>
       </div>
 
       <div class="cap claro" id="cap3">
-        <div class="wrap"><div class="txt">
+        <div class="wrap cap-grid"><div class="txt">
           <p class="eyebrow">Paso 3 · Reparación</p>
           <h2>Y vuelve a enfriar como nuevo</h2>
           <p class="lead">Reparamos con tu visto bueno y te dejamos garantía por escrito de 90 días. Facturamos y aceptamos tarjeta.</p>
           <div class="hero-ctas">
             <a class="btn btn-wa" href="https://wa.me/523315273735?text=Hola%2C%20necesito%20revisi%C3%B3n%20de%20mi%20refrigerador" target="_blank" rel="noopener" data-agendar>Agendar mi revisión</a>
           </div>
-        </div></div>
+        </div>
+          <figure class="fig-paso"><img src="/seq/d/121.webp" width="720" height="960" loading="lazy" decoding="async" alt="Refrigerador de acero cerrado, reparado"></figure>
+        </div>
       </div>
 
       <nav class="puntos" id="puntos" aria-label="Pasos del recorrido">
@@ -879,7 +890,8 @@ if (root.classList.contains('con3d')) {
     const s = 'rgb(' + c.join(',') + ')';
     if (s !== fondoAnt) { escenario.style.backgroundColor = s; fondoAnt = s; }
   }
-  addEventListener('scroll', () => requestAnimationFrame(textos), { passive: true });
+  let pend = false;
+  addEventListener('scroll', () => { if (pend) return; pend = true; requestAnimationFrame(() => { pend = false; textos(); }); }, { passive: true });
   addEventListener('resize', () => { ultimo = -1; textos(); });
   textos();
   dots.forEach((d, i) => d.addEventListener('click', () => {
@@ -888,7 +900,8 @@ if (root.classList.contains('con3d')) {
 
   // ---- Secuencia de cuadros ----
   const ligero = innerWidth < 900 || (navigator.deviceMemory && navigator.deviceMemory < 4);
-  const SET = ligero ? { dir: '/seq/m/', n: 61, paso: 2 } : { dir: '/seq/d/', n: 121, paso: 1 };
+  // Celular: los mismos cuadros de alta calidad (720x960), uno sí y uno no -> la mitad de datos, misma nitidez
+  const SET = ligero ? { dir: '/seq/d/', n: 61, paso: 2 } : { dir: '/seq/d/', n: 121, paso: 1 };
   const imgs = new Array(SET.n);
   const ctx = lienzo.getContext('2d');
   let datos = null, actual = 0, dibujado = -1, w = 0, h = 0, dpr = 1, caja = null, listo = false, visible = true;
@@ -896,9 +909,11 @@ if (root.classList.contains('con3d')) {
 
   function medir() {
     w = escenario.clientWidth; h = escenario.clientHeight; dpr = Math.min(devicePixelRatio || 1, 2);
-    lienzo.width = Math.round(w * dpr); lienzo.height = Math.round(h * dpr);
     const r = poster.getBoundingClientRect(), e = escenario.getBoundingClientRect();
     caja = { x: r.left - e.left, y: r.top - e.top, w: r.width, h: r.height };
+    // El lienzo mide lo mismo que el refri (no toda la pantalla): menos pixeles que pintar en cada cuadro
+    Object.assign(lienzo.style, { transform: `translate(${caja.x}px,${caja.y}px)`, width: caja.w + 'px', height: caja.h + 'px' });
+    lienzo.width = Math.round(caja.w * dpr); lienzo.height = Math.round(caja.h * dpr);
     dibujado = -1;
   }
   // Cuadro más cercano ya cargado (mientras llegan los demás)
@@ -913,8 +928,8 @@ if (root.classList.contains('con3d')) {
     const j = cercano(i); if (j < 0 || j === dibujado) return;
     dibujado = j;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, w, h);
-    ctx.drawImage(imgs[j], caja.x, caja.y, caja.w, caja.h);
+    ctx.clearRect(0, 0, caja.w, caja.h);
+    ctx.drawImage(imgs[j], 0, 0, caja.w, caja.h);
     if (!listo) { listo = true; root.classList.add('listo3d'); }
     if (!datos) return;
     const k = Math.min(120, j * SET.paso);
@@ -950,7 +965,7 @@ if (root.classList.contains('con3d')) {
       while (enVuelo < 6 && cola.length) {
         const i = cola.shift(); enVuelo++;
         const im = new Image(); im.decoding = 'async';
-        im.src = SET.dir + String(i + 1).padStart(3, '0') + '.webp';
+        im.src = SET.dir + String(i * SET.paso + 1).padStart(3, '0') + '.webp';
         im.decode().then(() => { imgs[i] = im; dibujado = -1; }).catch(() => {}).finally(() => { enVuelo--; siguiente(); });
       }
     };
@@ -968,7 +983,7 @@ if (root.classList.contains('con3d')) {
     if (!pedido || !visible || document.hidden) { tAnt = now; return; }
     const dt = Math.min(.05, (now - tAnt) / 1000); tAnt = now;
     const meta = prog() * (SET.n - 1);
-    actual += (meta - actual) * (1 - Math.exp(-dt * 12));
+    actual += (meta - actual) * (1 - Math.exp(-dt * 16));
     if (Math.abs(meta - actual) < .02) actual = meta;
     pintar(Math.round(actual));
   })(tAnt);
