@@ -489,6 +489,7 @@ export function renderPage(page, ctx) {
 <html lang="es-MX">
 <head>
 <meta charset="utf-8">
+<script>if(location.hostname==="refrigeradores-express-gdl.onrender.com")location.replace("https://reparacionderefrigeradores.onrender.com"+location.pathname+location.search+location.hash)</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(page.title)}</title>
 <meta name="description" content="${esc(page.description)}">
@@ -562,6 +563,7 @@ export function render404(ctx) {
 <html lang="es-MX">
 <head>
 <meta charset="utf-8">
+<script>if(location.hostname==="refrigeradores-express-gdl.onrender.com")location.replace("https://reparacionderefrigeradores.onrender.com"+location.pathname+location.search+location.hash)</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Página no encontrada | ${esc(SITE.name)}</title>
 <meta name="robots" content="noindex">
