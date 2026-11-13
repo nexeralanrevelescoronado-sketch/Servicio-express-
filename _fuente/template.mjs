@@ -1,8 +1,10 @@
-// Plantilla, estilos y schema. Sin JavaScript en el navegador: todo el sitio es HTML + CSS.
+// Plantilla, estilos y schema. El sitio es HTML + CSS; el único JavaScript es la nieve decorativa (/nieve.js, se carga al final).
 import { SITE, PAGES, GROUPS } from './data.mjs';
 
 export const byKey = Object.fromEntries(PAGES.map((p) => [p.key, p]));
 export const href = (p) => (p.slug ? `/${p.slug}/` : '/');
+// Nieve 3D de fondo en todas las páginas (fuente: _fuente/nieve.js; build.mjs la copia a /nieve.js).
+export const NIEVE = '<script src="/nieve.js" defer></script>\n';
 
 const esc = (s) =>
   String(s)
@@ -551,7 +553,7 @@ ${footerCol('servicios')}${footerCol('zonas')}${footerCol('fallas')}${footerSite
 <div class="copy"><span>© ${new Date().getFullYear()} ${esc(SITE.legalName)}</span><span>Guadalajara, Jalisco</span></div>
 </div></footer>
 <a class="fab" href="${wa}" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">${ICON_WA}</a>
-</body>
+${NIEVE}</body>
 </html>
 `;
 }
@@ -582,7 +584,7 @@ export function render404(ctx) {
 <ul class="chips" style="margin-top:28px">${links}</ul>
 <div class="ctas"><a class="btn btn-dark" href="/">Ir al inicio</a></div>
 </div></section></main>
-</body>
+${NIEVE}</body>
 </html>
 `;
 }

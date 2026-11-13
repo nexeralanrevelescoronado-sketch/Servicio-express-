@@ -9,7 +9,7 @@ import { mkdirSync, writeFileSync, existsSync, rmSync, readFileSync } from 'node
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PAGES } from './data.mjs';
-import { renderPage, render404, href } from './template.mjs';
+import { renderPage, render404, href, NIEVE } from './template.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE_URL = (process.env.SITE_URL || 'https://reparacionderefrigeradores.onrender.com').replace(/\/+$/, '');
@@ -46,6 +46,9 @@ for (const p of PAGES) {
 }
 out('404.html', render404(ctx));
 
+// Nieve 3D: un solo archivo que comparten todas las páginas (queda en caché del navegador).
+out('nieve.js', readFileSync(join(ROOT, '_fuente', 'nieve.js'), 'utf8'));
+
 // Inicio inmersivo 3D: si existe _fuente/inicio-3d.html, reemplaza la portada de la plantilla.
 // Usa las mismas variables (SITE_URL, GTM_ID, og.jpg) y pasa por las mismas verificaciones de abajo.
 const INICIO_3D = join(ROOT, '_fuente', 'inicio-3d.html');
@@ -63,7 +66,8 @@ if (existsSync(INICIO_3D)) {
     .replaceAll('{{SITE_URL}}', SITE_URL)
     .replace('{{OG_IMAGE}}', ogImg)
     .replace('{{GTM_HEAD}}', gtmHead)
-    .replace('{{GTM_BODY}}', gtmBody);
+    .replace('{{GTM_BODY}}', gtmBody)
+    .replace('{{NIEVE}}', NIEVE);
   if (/\{\{[A-Z_]+\}\}/.test(html)) errors.push('home: quedó una variable {{...}} sin reemplazar en inicio-3d.html');
   out('index.html', html);
   generated.set('/', html);
